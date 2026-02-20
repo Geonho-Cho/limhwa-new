@@ -1,0 +1,47 @@
+{
+  "careers": {
+    "intro": {
+      "ko": "임화금속과 함께 성장할 인재를 찾습니다.",
+      "en": "Join our team and grow with LIMHWA METAL."
+    },
+    "benefits": [
+      { "ko": "4대 보험", "en": "Social Insurance" },
+      { "ko": "퇴직금", "en": "Retirement Pay" },
+      { "ko": "연차/월차", "en": "Annual Leave" },
+      { "ko": "명절 선물", "en": "Holiday Gifts" },
+      { "ko": "경조사 지원", "en": "Family Event Support" }
+    ],
+    "positions": [
+      {
+        "id": "job-001",
+        "title": { "ko": "생산직 사원", "en": "Production Staff" },
+        "department": { "ko": "생산팀", "en": "Production" },
+        "type": "full-time",
+        "description": {
+          "ko": "냉간단조 설비 운영 및 제품 생산",
+          "en": "Cold forging machine operation and product manufacturing"
+        },
+        "requirements": [
+          { "ko": "관련 경력 우대", "en": "Experience preferred" },
+          { "ko": "성실하고 책임감 있는 분", "en": "Diligent and responsible" }
+        ],
+        "isActive": false
+      },
+      {
+        "id": "job-002",
+        "title": { "ko": "품질관리 담당자", "en": "Quality Control Staff" },
+        "department": { "ko": "품질팀", "en": "Quality" },
+        "type": "full-time",
+        "description": {
+          "ko": "제품 품질 검사 및 관리",
+          "en": "Product quality inspection and management"
+        },
+        "requirements": [
+          { "ko": "품질관리 경력 2년 이상", "en": "2+ years QC experience" },
+          { "ko": "측정장비 사용 가능자", "en": "Able to use measurement equipment" }
+        ],
+        "isActive": false
+      }
+    ]
+  }
+}

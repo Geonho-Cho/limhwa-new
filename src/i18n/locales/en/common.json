@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "products": "Products",
+    "equipment": "Equipment",
+    "rnd": "R&D",
+    "esg": "ESG",
+    "quality": "Quality",
+    "careers": "Careers",
+    "quote": "Quote"
+  },
+  "common": {
+    "viewMore": "View More",
+    "contactUs": "Contact Us",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Successfully completed"
+  },
+  "footer": {
+    "address": "Address",
+    "tel": "Tel",
+    "fax": "Fax",
+    "email": "Email",
+    "copyright": "© 2024 LIMHWA METAL. All rights reserved."
+  },
+  "hero": {
+    "slogan": "Cold Forging Specialist, Building Trust Through Precision",
+    "cta": "Request Quote"
+  }
+}

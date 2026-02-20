@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "홈",
+    "about": "회사소개",
+    "products": "제품소개",
+    "equipment": "설비/기술",
+    "rnd": "R&D",
+    "esg": "ESG",
+    "quality": "품질관리",
+    "careers": "채용안내",
+    "quote": "견적문의"
+  },
+  "common": {
+    "viewMore": "자세히 보기",
+    "contactUs": "문의하기",
+    "submit": "제출",
+    "cancel": "취소",
+    "loading": "로딩 중...",
+    "error": "오류가 발생했습니다",
+    "success": "성공적으로 완료되었습니다"
+  },
+  "footer": {
+    "address": "주소",
+    "tel": "전화",
+    "fax": "팩스",
+    "email": "이메일",
+    "copyright": "© 2024 임화금속. All rights reserved."
+  },
+  "hero": {
+    "slogan": "냉간단조 전문기업, 정밀함으로 신뢰를 만듭니다",
+    "cta": "견적 문의하기"
+  }
+}

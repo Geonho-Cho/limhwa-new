@@ -1,0 +1,226 @@
+@import "tailwindcss";
+
+/* Pretendard 폰트 (CDN) */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+/* Noto Sans KR (Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
+/* Inter (Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* Tailwind v4 커스텀 테마 */
+@theme {
+  /* 색상 - 성원아이엔디 유사 스타일 */
+  --color-primary: #0A3D62;
+  --color-primary-dark: #082d49;
+  --color-primary-light: #0d4a75;
+  --color-accent: #2563eb;
+  --color-accent-dark: #1d4ed8;
+  --color-accent-light: #3b82f6;
+  --color-dark: #1a1a1a;
+  --color-light: #F8F9FA;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* 폰트 */
+  --font-sans: 'Pretendard', 'Noto Sans KR', sans-serif;
+  --font-heading: 'Inter', 'Pretendard', sans-serif;
+}
+
+/* 기본 스타일 */
+body {
+  font-family: var(--font-sans);
+  color: var(--color-dark);
+  background-color: #ffffff;
+  margin: 0;
+  min-height: 100vh;
+  line-height: 1.7;
+}
+
+/* 영문 헤딩 스타일 - 대문자 */
+.heading-en {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+/* 섹션 타이틀 스타일 */
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  color: var(--color-gray-600);
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+/* 버튼 스타일 */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background-color: var(--color-accent);
+  color: white;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-dark);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background-color: transparent;
+  color: white;
+  font-weight: 600;
+  border: 2px solid white;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background-color: white;
+  color: var(--color-dark);
+}
+
+.btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background-color: transparent;
+  color: var(--color-dark);
+  font-weight: 600;
+  border: 2px solid var(--color-gray-300);
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-dark:hover {
+  border-color: var(--color-dark);
+  background-color: var(--color-dark);
+  color: white;
+}
+
+/* View More 링크 스타일 */
+.link-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  transition: all 0.2s ease;
+}
+
+.link-more:hover {
+  gap: 0.75rem;
+}
+
+.link-more::after {
+  content: '→';
+  transition: transform 0.2s ease;
+}
+
+.link-more:hover::after {
+  transform: translateX(4px);
+}
+
+/* 카테고리 탭 버튼 */
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-gray-800);
+  color: white;
+  font-weight: 500;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  background-color: var(--color-gray-700);
+}
+
+.tab-btn.active {
+  background-color: var(--color-accent);
+}
+
+/* 페이지 배너 스타일 */
+.page-banner {
+  position: relative;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+}
+
+.page-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/images/pattern.png') repeat;
+  opacity: 0.05;
+}
+
+/* 브레드크럼 */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.breadcrumb a:hover {
+  color: white;
+}
+
+/* 스크롤 애니메이션 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* 호버 카드 효과 */
+.hover-card {
+  transition: all 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}

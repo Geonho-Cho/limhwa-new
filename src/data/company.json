@@ -1,0 +1,36 @@
+{
+  "info": {
+    "name": { "ko": "임화금속", "en": "LIMHWA METAL" },
+    "slogan": { "ko": "냉간단조 전문기업, 정밀함으로 신뢰를 만듭니다", "en": "Cold Forging Specialist, Building Trust Through Precision" },
+    "established": 1995,
+    "employees": 30,
+    "monthlyCapacity": "100만개",
+    "address": {
+      "ko": "경기도 화성시 OO읍 OO로 123",
+      "en": "123 OO-ro, OO-eup, Hwaseong-si, Gyeonggi-do, Korea"
+    },
+    "tel": "031-000-0000",
+    "fax": "031-000-0001",
+    "email": "info@limhwa.co.kr"
+  },
+  "ceoMessage": {
+    "title": { "ko": "CEO 인사말", "en": "CEO Message" },
+    "content": {
+      "ko": "안녕하십니까. 임화금속을 찾아주셔서 감사합니다.\n\n저희 임화금속은 1995년 설립 이래 냉간단조 전문기업으로서 자동차 부품 제조에 매진해 왔습니다.\n\n앞으로도 품질과 기술력으로 고객 여러분의 신뢰에 보답하겠습니다.",
+      "en": "Thank you for visiting LIMHWA METAL.\n\nSince our establishment in 1995, LIMHWA METAL has been dedicated to manufacturing automotive parts as a cold forging specialist.\n\nWe will continue to repay our customers' trust with quality and technology."
+    },
+    "image": "/images/company/ceo.jpg"
+  },
+  "history": [
+    { "year": 1995, "event": { "ko": "회사 설립", "en": "Company founded" } },
+    { "year": 2000, "event": { "ko": "ISO 9001 인증 획득", "en": "ISO 9001 certification acquired" } },
+    { "year": 2010, "event": { "ko": "공장 확장 이전", "en": "Factory expansion and relocation" } },
+    { "year": 2015, "event": { "ko": "IATF 16949 인증 획득", "en": "IATF 16949 certification acquired" } },
+    { "year": 2020, "event": { "ko": "스마트 공장 구축", "en": "Smart factory implementation" } }
+  ],
+  "certifications": [
+    { "name": "ISO 9001", "image": "/images/cert/iso9001.png" },
+    { "name": "IATF 16949", "image": "/images/cert/iatf16949.png" },
+    { "name": "ISO 14001", "image": "/images/cert/iso14001.png" }
+  ]
+}

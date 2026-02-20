@@ -1,0 +1,42 @@
+{
+  "equipment": [
+    {
+      "id": "heading-001",
+      "name": { "ko": "냉간헤딩기", "en": "Cold Heading Machine" },
+      "description": { "ko": "고속 냉간단조를 위한 헤딩머신", "en": "Heading machine for high-speed cold forging" },
+      "image": "/images/equipment/heading-001.jpg",
+      "specs": {
+        "capacity": "최대 M24",
+        "quantity": 5
+      },
+      "order": 1
+    },
+    {
+      "id": "former-001",
+      "name": { "ko": "볼트포밍기", "en": "Bolt Former" },
+      "description": { "ko": "다단 볼트 성형기", "en": "Multi-stage bolt former" },
+      "image": "/images/equipment/former-001.jpg",
+      "specs": {
+        "capacity": "최대 M16",
+        "quantity": 3
+      },
+      "order": 2
+    }
+  ],
+  "inspection": [
+    {
+      "id": "inspect-001",
+      "name": { "ko": "3차원 측정기", "en": "CMM" },
+      "description": { "ko": "고정밀 3차원 좌표 측정기", "en": "High-precision coordinate measuring machine" },
+      "image": "/images/equipment/cmm-001.jpg",
+      "order": 1
+    },
+    {
+      "id": "inspect-002",
+      "name": { "ko": "경도계", "en": "Hardness Tester" },
+      "description": { "ko": "로크웰/브리넬 경도 측정기", "en": "Rockwell/Brinell hardness tester" },
+      "image": "/images/equipment/hardness-001.jpg",
+      "order": 2
+    }
+  ]
+}

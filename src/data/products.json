@@ -1,0 +1,46 @@
+{
+  "products": [
+    {
+      "id": "bolt-001",
+      "category": "bolt",
+      "name": { "ko": "육각볼트", "en": "Hex Bolt" },
+      "description": { "ko": "고강도 냉간단조 육각볼트", "en": "High-strength cold forged hex bolt" },
+      "image": "/images/products/bolt-001.jpg",
+      "specifications": {
+        "material": "SCM435",
+        "sizeRange": "M6~M24",
+        "standard": "KS/JIS"
+      },
+      "featured": true,
+      "order": 1
+    },
+    {
+      "id": "nut-001",
+      "category": "nut",
+      "name": { "ko": "육각너트", "en": "Hex Nut" },
+      "description": { "ko": "정밀 냉간단조 육각너트", "en": "Precision cold forged hex nut" },
+      "image": "/images/products/nut-001.jpg",
+      "specifications": {
+        "material": "SCM435",
+        "sizeRange": "M6~M24",
+        "standard": "KS/JIS"
+      },
+      "featured": true,
+      "order": 2
+    },
+    {
+      "id": "gear-001",
+      "category": "gear",
+      "name": { "ko": "기어", "en": "Gear" },
+      "description": { "ko": "자동차용 정밀 기어", "en": "Automotive precision gear" },
+      "image": "/images/products/gear-001.jpg",
+      "specifications": {
+        "material": "SCM420",
+        "sizeRange": "Φ20~Φ80",
+        "standard": "KS/JIS"
+      },
+      "featured": true,
+      "order": 3
+    }
+  ]
+}

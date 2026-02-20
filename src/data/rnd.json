@@ -1,0 +1,40 @@
+{
+  "rnd": {
+    "intro": {
+      "ko": "지속적인 기술 개발로 미래를 선도합니다.",
+      "en": "Leading the future through continuous R&D."
+    },
+    "technologies": [
+      {
+        "id": "tech-001",
+        "name": { "ko": "냉간단조 공법", "en": "Cold Forging Process" },
+        "description": {
+          "ko": "상온에서 금속을 성형하는 냉간단조 기술로 고강도, 고정밀 부품을 생산합니다.",
+          "en": "Cold forging technology that forms metal at room temperature to produce high-strength, high-precision parts."
+        },
+        "image": "/images/rnd/cold-forging.jpg"
+      },
+      {
+        "id": "tech-002",
+        "name": { "ko": "금형 설계 기술", "en": "Die Design Technology" },
+        "description": {
+          "ko": "자체 금형 설계 및 제작 능력으로 고객 맞춤형 제품을 신속하게 개발합니다.",
+          "en": "In-house die design and manufacturing capabilities enable rapid development of customized products."
+        },
+        "image": "/images/rnd/die-design.jpg"
+      }
+    ],
+    "patents": [
+      {
+        "id": "patent-001",
+        "name": { "ko": "냉간단조용 금형 구조", "en": "Die Structure for Cold Forging" },
+        "number": "10-1234567",
+        "date": "2020-01-01"
+      }
+    ],
+    "certifications": [
+      { "name": "IATF 16949", "image": "/images/cert/iatf16949.png" },
+      { "name": "ISO 9001", "image": "/images/cert/iso9001.png" }
+    ]
+  }
+}
