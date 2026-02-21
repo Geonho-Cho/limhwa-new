@@ -61,22 +61,19 @@ export default function Products() {
         </div>
 
         {/* 카테고리 필터 */}
-        <div className="flex justify-center mb-8">
-          <div className="inline-flex rounded-lg bg-white shadow p-1">
-            {categories.map((cat) => (
-              <button
-                key={cat.value}
-                onClick={() => setActiveCategory(cat.value)}
-                className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
-                  activeCategory === cat.value
-                    ? 'bg-primary text-white'
-                    : 'text-gray-600 hover:bg-gray-100'
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {categories.map((cat) => (
+            <button
+              key={cat.value}
+              onClick={() => setActiveCategory(cat.value)}
+              className={`px-8 py-3 rounded-full text-sm font-bold transition-all duration-300 ${activeCategory === cat.value
+                  ? 'bg-primary text-white shadow-md transform -translate-y-1 scale-105'
+                  : 'bg-white text-gray-500 hover:text-gray-900 hover:bg-gray-50 border border-gray-200 hover:border-gray-300'
                 }`}
-              >
-                {cat.label[lang]}
-              </button>
-            ))}
-          </div>
+            >
+              {cat.label[lang]}
+            </button>
+          ))}
         </div>
 
         {/* 제품 그리드 */}
@@ -115,9 +112,9 @@ function ProductCard({ product, lang }: { product: Product; lang: 'ko' | 'en' })
   const [imageError, setImageError] = useState(false)
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+    <div className="bg-white w-full rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover-card flex flex-col h-full group">
       {/* 이미지 영역 */}
-      <div className="h-48 bg-gray-200 flex items-center justify-center">
+      <div className="h-64 bg-gray-50 flex items-center justify-center relative overflow-hidden">
         {imageError ? (
           <div className="text-center text-gray-400">
             <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,10 +126,11 @@ function ProductCard({ product, lang }: { product: Product; lang: 'ko' | 'en' })
           <img
             src={product.image}
             alt={product.name[lang]}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
             onError={() => setImageError(true)}
           />
         )}
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
       </div>
 
       {/* 정보 영역 */}

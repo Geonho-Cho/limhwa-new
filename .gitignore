@@ -31,3 +31,5 @@ uploads/
 # Test artifacts
 screenshots/
 test_pages.py
+
+.vercel

@@ -80,17 +80,24 @@ export default function Home() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            {/* 이미지/로고 */}
-            <div className="relative">
-              <div className="aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden">
+            {/* 회사 이미지 / 로고 */}
+            <div className="relative group">
+              <div className="aspect-[4/3] bg-gradient-to-br from-gray-50 to-gray-200 rounded-2xl overflow-hidden shadow-lg relative border border-gray-100">
                 <img
-                  src="/images/logo.png"
-                  alt="LIMHWA METAL"
-                  className="w-full h-full object-contain p-12"
+                  src="/images/equipment/former-001.jpg"
+                  alt="Bolt Former"
+                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
                 />
+                <div className="absolute inset-0 flex items-center justify-center p-12 backdrop-blur-[2px] bg-white/40 group-hover:bg-white/20 transition-colors duration-500">
+                  <img
+                    src="/images/logo.png"
+                    alt="LIMHWA METAL"
+                    className="w-full h-full object-contain drop-shadow-lg relative z-10"
+                  />
+                </div>
               </div>
               {/* 장식 요소 */}
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-accent/10 rounded-lg -z-10" />
+              <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-accent/20 rounded-full blur-3xl -z-10" />
             </div>
 
             {/* 텍스트 */}
@@ -135,13 +142,22 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* 오른쪽: 이미지 placeholder */}
-            <div className="relative">
-              <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-white/50">
-                  <span className="text-6xl">🔩</span>
+            {/* 오른쪽: 제품 이미지 */}
+            <div className="relative group">
+              <div className="aspect-video bg-gray-800 rounded-2xl overflow-hidden shadow-2xl relative">
+                <img 
+                  src="/images/products/bolt-001.jpg" 
+                  alt="Cold Forged Bolt Product" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent"></div>
+                <div className="absolute bottom-6 left-6 text-white text-left z-10">
+                  <h3 className="text-2xl font-bold mb-1">Cold Forged Bolt</h3>
+                  <p className="text-sm text-gray-300">High-strength & precision formed</p>
                 </div>
               </div>
+              {/* 장식 요소 */}
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/20 rounded-full blur-3xl -z-10" />
             </div>
           </div>
 

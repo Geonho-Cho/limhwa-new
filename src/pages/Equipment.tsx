@@ -66,8 +66,8 @@ function EquipmentCard({ item, lang }: {
   const [imageError, setImageError] = useState(false)
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-      <div className="h-48 bg-gray-200 flex items-center justify-center">
+    <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover-card flex flex-col h-full group">
+      <div className="h-56 bg-gray-50 flex items-center justify-center relative overflow-hidden">
         {imageError ? (
           <div className="text-center text-gray-400">
             <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,23 +78,24 @@ function EquipmentCard({ item, lang }: {
           <img
             src={item.image}
             alt={item.name[lang]}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             onError={() => setImageError(true)}
           />
         )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
       </div>
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-800 mb-2">{item.name[lang]}</h3>
-        <p className="text-gray-600 mb-4">{item.description[lang]}</p>
+      <div className="p-6 flex-1 flex flex-col">
+        <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-primary transition-colors">{item.name[lang]}</h3>
+        <p className="text-gray-600 mb-6 flex-1">{item.description[lang]}</p>
         {item.specs && (
-          <div className="border-t pt-4 space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-500">{lang === 'ko' ? '용량' : 'Capacity'}</span>
-              <span className="font-medium">{item.specs.capacity}</span>
+          <div className="border-t pt-4 space-y-3 text-sm bg-gray-50 -mx-6 -mb-6 p-6 mt-auto">
+            <div className="flex justify-between items-center">
+              <span className="text-gray-500 font-medium">{lang === 'ko' ? '장비 성능/규격' : 'Capacity'}</span>
+              <span className="font-bold text-dark bg-white px-3 py-1 rounded-md shadow-sm">{item.specs.capacity}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-gray-500">{lang === 'ko' ? '보유수량' : 'Quantity'}</span>
-              <span className="font-medium">{item.specs.quantity}{lang === 'ko' ? '대' : ' units'}</span>
+            <div className="flex justify-between items-center">
+              <span className="text-gray-500 font-medium">{lang === 'ko' ? '보유수량' : 'Quantity'}</span>
+              <span className="font-bold text-primary">{item.specs.quantity}{lang === 'ko' ? '대' : ' units'}</span>
             </div>
           </div>
         )}
