@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import Quote from './pages/Quote'
@@ -11,8 +12,18 @@ import Quality from './pages/Quality'
 import Careers from './pages/Careers'
 import CareerApply from './pages/CareerApply'
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
 function App() {
   return (
+    <>
+    <ScrollToTop />
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
@@ -27,6 +38,7 @@ function App() {
         <Route path="quote" element={<Quote />} />
       </Route>
     </Routes>
+    </>
   )
 }
 

@@ -19,6 +19,7 @@ function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null)
 
   const isHomePage = location.pathname === '/'
   const lang = i18n.language
@@ -30,6 +31,12 @@ function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false)
+    setMobileSubmenu(null)
+  }, [location.pathname])
 
   const navItems: NavItem[] = useMemo(() => [
     {
@@ -170,29 +177,60 @@ function Header() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-white border-t">
-            <nav className="py-4">
+          <div className="lg:hidden bg-white border-t max-h-[calc(100vh-5rem)] overflow-y-auto">
+            <nav className="py-2">
               {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className="block px-4 py-3 text-gray-800 hover:bg-gray-50"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
+                <div key={item.path}>
+                  {item.submenu ? (
+                    <>
+                      <button
+                        className="w-full flex items-center justify-between px-6 py-3.5 text-gray-800 hover:bg-gray-50 font-medium"
+                        onClick={() => setMobileSubmenu(mobileSubmenu === item.path ? null : item.path)}
+                      >
+                        {item.label}
+                        <svg
+                          className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${mobileSubmenu === item.path ? 'rotate-180' : ''}`}
+                          fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      {mobileSubmenu === item.path && (
+                        <div className="bg-gray-50">
+                          {item.submenu.map((sub) => (
+                            <Link
+                              key={sub.path}
+                              to={sub.path}
+                              className="block pl-10 pr-6 py-3 text-sm text-gray-600 hover:text-accent hover:bg-gray-100 transition-colors"
+                              onClick={() => { setIsMobileMenuOpen(false); setMobileSubmenu(null) }}
+                            >
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      className="block px-6 py-3.5 text-gray-800 hover:bg-gray-50 font-medium"
+                      onClick={() => { setIsMobileMenuOpen(false); setMobileSubmenu(null) }}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </div>
               ))}
-              <div className="px-4 py-3 border-t mt-2 flex items-center space-x-2 text-sm">
+              <div className="px-6 py-3 border-t mt-2 flex items-center space-x-3 text-sm">
                 <button
                   onClick={() => { i18n.changeLanguage('ko'); setIsMobileMenuOpen(false) }}
-                  className={lang === 'ko' ? 'text-accent font-semibold' : 'text-gray-600'}
+                  className={`px-3 py-1.5 rounded-full transition-colors ${lang === 'ko' ? 'bg-accent text-white font-semibold' : 'text-gray-600 bg-gray-100'}`}
                 >
                   Korean
                 </button>
-                <span className="text-gray-300">·</span>
                 <button
                   onClick={() => { i18n.changeLanguage('en'); setIsMobileMenuOpen(false) }}
-                  className={lang === 'en' ? 'text-accent font-semibold' : 'text-gray-600'}
+                  className={`px-3 py-1.5 rounded-full transition-colors ${lang === 'en' ? 'bg-accent text-white font-semibold' : 'text-gray-600 bg-gray-100'}`}
                 >
                   English
                 </button>
