@@ -33,3 +33,11 @@ screenshots/
 test_pages.py
 
 .vercel
+
+# AI tooling / orchestration (local only — do not commit)
+.claude/
+.omc/
+.bkit/
+.pdca/
+docs/.bkit-memory.json
+docs/.pdca-status.json
