@@ -2,35 +2,36 @@
   "info": {
     "name": { "ko": "임화금속", "en": "LIMHWA METAL" },
     "slogan": { "ko": "냉간단조 전문기업, 정밀함으로 신뢰를 만듭니다", "en": "Cold Forging Specialist, Building Trust Through Precision" },
-    "established": 1995,
-    "employees": 30,
-    "monthlyCapacity": "100만개",
+    "established": 1998,
+    "employees": 40,
+    "monthlyCapacity": "400ton",
     "address": {
-      "ko": "경기도 화성시 OO읍 OO로 123",
-      "en": "123 OO-ro, OO-eup, Hwaseong-si, Gyeonggi-do, Korea"
+      "ko": "경기도 화성시 만세구 남양읍 무하로 51번길 5",
+      "en": "5, Muha-ro 51beon-gil, Namyang-eup, Manse-gu, Hwaseong-si, Gyeonggi-do, Republic of Korea"
     },
-    "tel": "031-000-0000",
-    "fax": "031-000-0001",
-    "email": "info@limhwa.co.kr"
+    "tel": "031-366-8585",
+    "fax": "031-366-8686",
+    "email": "sales@limhwa.com"
   },
   "ceoMessage": {
-    "title": { "ko": "CEO 인사말", "en": "CEO Message" },
+    "title": { "ko": "정밀함으로 신뢰를 만드는 사람들", "en": "People Who Build Trust Through Precision" },
     "content": {
-      "ko": "안녕하십니까. 임화금속을 찾아주셔서 감사합니다.\n\n저희 임화금속은 1995년 설립 이래 냉간단조 전문기업으로서 자동차 부품 제조에 매진해 왔습니다.\n\n앞으로도 품질과 기술력으로 고객 여러분의 신뢰에 보답하겠습니다.",
-      "en": "Thank you for visiting LIMHWA METAL.\n\nSince our establishment in 1995, LIMHWA METAL has been dedicated to manufacturing automotive parts as a cold forging specialist.\n\nWe will continue to repay our customers' trust with quality and technology."
+      "ko": "㈜임화금속은 1998년 설립 이래 정밀 냉간단조 한 분야에 집중해 왔습니다. 절삭 가공에 의존하던 고난도 부품을 단조 공정으로 전환하며, 재료 손실을 줄이고 더 안정적인 품질을 구현하는 길을 꾸준히 찾아왔습니다.\n\n저희는 도면대로 부품을 만드는 데 그치지 않습니다. 설계 단계부터 고객사와 함께 가장 합리적인 공정을 고민하며, 그 약속을 품질로 증명합니다.\n\n전기차·통신·반도체로 이어지는 산업의 변화는 부품에 더 높은 정밀도와 신뢰성을 요구합니다. 임화금속의 모든 구성원은 특수 소재 단조 기술을 바탕으로 이 변화에 필요한 부품을 묵묵히 준비하며, 고객 여러분의 신뢰에 기술과 성실함으로 보답하겠습니다.\n\n㈜임화금속 임직원 일동",
+      "en": "Since its founding in 1998, LIMHWA METAL Co., Ltd. has focused on a single field — precision cold forging. By converting high-difficulty parts that once relied on machining into forged components, we have steadily pursued ways to reduce material loss and achieve more consistent quality.\n\nWe do not simply make parts to the drawing. From the design stage, we work together with our clients to find the most reasonable process, and we prove that commitment through quality.\n\nThe shift across industries — from electric vehicles to telecommunications and semiconductors — demands ever-higher precision and reliability from components. Every member of LIMHWA METAL quietly prepares the parts these changes require, built on our special-material forging technology, and we will repay your trust with technology and sincerity.\n\n— All of us at LIMHWA METAL Co., Ltd."
     },
     "image": "/images/company/ceo.jpg"
   },
   "history": [
-    { "year": 1995, "event": { "ko": "회사 설립", "en": "Company founded" } },
-    { "year": 2000, "event": { "ko": "ISO 9001 인증 획득", "en": "ISO 9001 certification acquired" } },
-    { "year": 2010, "event": { "ko": "공장 확장 이전", "en": "Factory expansion and relocation" } },
-    { "year": 2015, "event": { "ko": "IATF 16949 인증 획득", "en": "IATF 16949 certification acquired" } },
-    { "year": 2020, "event": { "ko": "스마트 공장 구축", "en": "Smart factory implementation" } }
+    { "year": "1998. 02", "event": { "ko": "㈜임화금속 설립", "en": "LIMHWA METAL Co., Ltd. founded" } },
+    { "year": "2002. 01", "event": { "ko": "현대·기아 SQ 단조 인증 획득", "en": "Hyundai·Kia SQ forging certification acquired" } },
+    { "year": "2005. 07", "event": { "ko": "ISO 14001 환경경영시스템 인증 획득", "en": "ISO 14001 Environmental Management System certification acquired" } },
+    { "year": "2007. 05", "event": { "ko": "기업부설연구소 설립", "en": "Corporate R&D center established" } },
+    { "year": "2018. 07", "event": { "ko": "ISO 9001 품질경영시스템 인증 획득", "en": "ISO 9001 Quality Management System certification acquired" } },
+    { "year": "2023. 12", "event": { "ko": "KEYENCE LM-X100T 3차원 검사장비 도입", "en": "KEYENCE LM-X100T 3D measurement system introduced" } }
   ],
   "certifications": [
+    { "name": "현대·기아 SQ", "image": "/images/cert/hyundai-kia-sq.png" },
     { "name": "ISO 9001", "image": "/images/cert/iso9001.png" },
-    { "name": "IATF 16949", "image": "/images/cert/iatf16949.png" },
     { "name": "ISO 14001", "image": "/images/cert/iso14001.png" }
   ]
 }

@@ -112,8 +112,8 @@ export default function Home() {
               </h3>
               <p className="section-subtitle mb-8">
                 {lang === 'ko'
-                  ? '임화금속은 1995년 설립 이래 냉간단조 전문기업으로서 자동차 핵심 부품을 안정적으로 공급하고 있습니다. 30년간 축적된 기술력과 품질에 대한 자부심으로 고객 신뢰를 쌓아왔습니다.'
-                  : 'Since its establishment in 1995, LIMHWA METAL has been reliably supplying core automotive components as a cold forging specialist. We have built customer trust through 30 years of accumulated technology and quality pride.'}
+                  ? `임화금속은 ${info.established}년 설립 이래 냉간단조 전문기업으로서 자동차 핵심 부품을 안정적으로 공급하고 있습니다. ${yearsInBusiness}년간 축적된 기술력과 품질에 대한 자부심으로 고객 신뢰를 쌓아왔습니다.`
+                  : `Since its establishment in ${info.established}, LIMHWA METAL has been reliably supplying core automotive components as a cold forging specialist. We have built customer trust through ${yearsInBusiness} years of accumulated technology and quality pride.`}
               </p>
               <Link to="/about" className="link-more">
                 View More
@@ -230,7 +230,7 @@ export default function Home() {
             </div>
             <div>
               <div className="text-5xl md:text-6xl font-bold mb-2">{info.monthlyCapacity}</div>
-              <div className="text-white/70">{lang === 'ko' ? '월 생산량' : 'Monthly'}</div>
+              <div className="text-white/70">{lang === 'ko' ? '월 생산능력' : 'Monthly Capacity'}</div>
             </div>
             <div>
               <div className="text-5xl md:text-6xl font-bold mb-2">3</div>

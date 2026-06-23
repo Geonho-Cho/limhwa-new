@@ -43,7 +43,7 @@ function Header() {
       path: '/about',
       label: t('nav.about'),
       submenu: [
-        { path: '/about', label: lang === 'ko' ? 'CEO 인사말' : 'CEO Message' },
+        { path: '/about#greeting', label: lang === 'ko' ? '인사말' : 'Greetings' },
         { path: '/about#history', label: lang === 'ko' ? '연혁' : 'History' },
         { path: '/about#location', label: lang === 'ko' ? '오시는 길' : 'Location' },
       ],
@@ -259,8 +259,8 @@ function Footer() {
             />
           </div>
           <div className="text-gray-400 text-sm space-y-1">
-            <p>[12345] 경기도 화성시 OO읍 OO로 123</p>
-            <p>TEL 031-000-0000 &nbsp;&nbsp; FAX 031-000-0001</p>
+            <p>경기도 화성시 만세구 남양읍 무하로 51번길 5</p>
+            <p>TEL 031-366-8585 &nbsp;&nbsp; FAX 031-366-8686</p>
           </div>
         </div>
 

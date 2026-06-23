@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import PageBanner from '../components/PageBanner'
 import companyData from '../data/company.json'
@@ -6,6 +7,7 @@ export default function About() {
   const { i18n } = useTranslation()
   const lang = i18n.language as 'ko' | 'en'
   const { info, ceoMessage, history, certifications } = companyData
+  const [zoomImage, setZoomImage] = useState<string | null>(null)
 
   return (
     <div className="min-h-screen">
@@ -33,7 +35,7 @@ export default function About() {
             </div>
             <div className="bg-gray-50 p-8 rounded-xl text-center hover-card">
               <p className="text-5xl font-bold text-primary mb-2">{info.monthlyCapacity}</p>
-              <p className="text-gray-600">{lang === 'ko' ? '월 생산량' : 'Monthly'}</p>
+              <p className="text-gray-600">{lang === 'ko' ? '월 생산능력' : 'Monthly Capacity'}</p>
             </div>
             <div className="bg-gray-50 p-8 rounded-xl text-center hover-card">
               <p className="text-5xl font-bold text-primary mb-2">{certifications.length}</p>
@@ -43,11 +45,17 @@ export default function About() {
         </div>
       </section>
 
-      {/* CEO 인사말 */}
-      <section className="py-20 bg-gray-50" id="ceo">
-        <div className="max-w-4xl mx-auto px-6">
+      {/* 인사말 (임직원 일동) */}
+      <section className="relative overflow-hidden py-20 bg-gray-50" id="greeting">
+        {/* 배경 사진 (옅게) */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-[0.15] pointer-events-none"
+          style={{ backgroundImage: "url('/images/company-factory.png')" }}
+          aria-hidden="true"
+        />
+        <div className="relative max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="heading-en text-sm text-accent mb-4">CEO MESSAGE</h2>
+            <h2 className="heading-en text-sm text-accent mb-4">TOGETHER</h2>
             <h3 className="text-3xl font-bold">{ceoMessage.title[lang]}</h3>
           </div>
           <div className="bg-white p-10 rounded-2xl shadow-sm">
@@ -59,8 +67,14 @@ export default function About() {
       </section>
 
       {/* 연혁 */}
-      <section className="py-20 bg-white" id="history">
-        <div className="max-w-4xl mx-auto px-6">
+      <section className="relative overflow-hidden py-20 bg-white" id="history">
+        {/* 배경 사진 (옅게) */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-[0.15] pointer-events-none"
+          style={{ backgroundImage: "url('/images/company-factory-2.png')" }}
+          aria-hidden="true"
+        />
+        <div className="relative max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="heading-en text-sm text-accent mb-4">HISTORY</h2>
             <h3 className="text-3xl font-bold">{lang === 'ko' ? '연혁' : 'History'}</h3>
@@ -112,16 +126,29 @@ export default function About() {
             <h2 className="heading-en text-sm text-accent mb-4">CERTIFICATION</h2>
             <h3 className="text-3xl font-bold">{lang === 'ko' ? '인증현황' : 'Certifications'}</h3>
           </div>
-          <div className="flex justify-center gap-8 flex-wrap">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {certifications.map((cert, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-28 h-28 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-3 group-hover:shadow-lg transition-shadow">
-                  <span className="text-sm font-bold text-primary">{cert.name}</span>
+              <button
+                key={index}
+                type="button"
+                onClick={() => setZoomImage(cert.image)}
+                className="group text-center focus:outline-none"
+              >
+                <div className="bg-white rounded-2xl shadow-sm p-4 mb-3 overflow-hidden group-hover:shadow-lg transition-shadow">
+                  <img
+                    src={cert.image}
+                    alt={cert.name}
+                    loading="lazy"
+                    className="w-full h-80 object-contain transition-transform group-hover:scale-[1.02]"
+                  />
                 </div>
-                <p className="text-sm text-gray-600">{cert.name}</p>
-              </div>
+                <p className="text-sm font-medium text-gray-700">{cert.name}</p>
+              </button>
             ))}
           </div>
+          <p className="text-center text-sm text-gray-400 mt-8">
+            {lang === 'ko' ? '이미지를 클릭하면 크게 볼 수 있습니다.' : 'Click an image to view it in full size.'}
+          </p>
         </div>
       </section>
 
@@ -133,10 +160,12 @@ export default function About() {
             <h3 className="text-3xl font-bold">{lang === 'ko' ? '오시는 길' : 'Location'}</h3>
           </div>
           <div className="bg-gray-50 rounded-2xl overflow-hidden">
-            {/* 지도 영역 */}
-            <div className="bg-gray-200 h-80 flex items-center justify-center">
-              <span className="text-gray-500">{lang === 'ko' ? '지도 영역' : 'Map Area'}</span>
-            </div>
+            {/* 지도 (약도) */}
+            <img
+              src="/images/location-map.png"
+              alt={lang === 'ko' ? '㈜임화금속 오시는 길 약도' : 'Directions to LIMHWA METAL'}
+              className="w-full h-auto"
+            />
             {/* 주소 정보 */}
             <div className="p-8">
               <div className="grid md:grid-cols-2 gap-8">
@@ -157,6 +186,31 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      {/* 인증서 확대 보기 (라이트박스) */}
+      {zoomImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 cursor-zoom-out"
+          onClick={() => setZoomImage(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <img
+            src={zoomImage}
+            alt=""
+            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            type="button"
+            onClick={() => setZoomImage(null)}
+            className="absolute top-6 right-8 text-white text-5xl leading-none hover:text-gray-300"
+            aria-label={lang === 'ko' ? '닫기' : 'Close'}
+          >
+            &times;
+          </button>
+        </div>
+      )}
     </div>
   )
 }
