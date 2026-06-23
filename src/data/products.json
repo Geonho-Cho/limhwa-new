@@ -1,45 +1,51 @@
 {
-  "products": [
+  "strategicProducts": [
     {
-      "id": "bolt-001",
-      "category": "bolt",
-      "name": { "ko": "육각볼트", "en": "Hex Bolt" },
-      "description": { "ko": "고강도 냉간단조 육각볼트", "en": "High-strength cold forged hex bolt" },
-      "image": "/images/products/bolt-001.jpg",
-      "specifications": {
-        "material": "SCM435",
-        "sizeRange": "M6~M24",
-        "standard": "KS/JIS"
+      "id": "ev-battery-terminal",
+      "industry": { "ko": "전기차 · 모빌리티", "en": "EV · Mobility" },
+      "name": { "ko": "EV 배터리 파워 터미널", "en": "EV Battery Power Terminal" },
+      "description": {
+        "ko": "전기차 배터리 팩 내부 전력 연결에 사용되는 고전도성 비철 냉간단조 부품입니다.",
+        "en": "High-conductivity non-ferrous cold-forged part for power connections inside EV battery packs."
       },
-      "featured": true,
+      "image": "/images/products/ev-battery-terminal.jpg",
+      "specs": [
+        { "label": { "ko": "재질", "en": "Material" }, "value": "C1020 무산소동(OFC)" },
+        { "label": { "ko": "공법", "en": "Process" }, "value": "고전도성 비철 냉간단조" },
+        { "label": { "ko": "특징", "en": "Feature" }, "value": "고전도 · 고강도" }
+      ],
       "order": 1
     },
     {
-      "id": "nut-001",
-      "category": "nut",
-      "name": { "ko": "육각너트", "en": "Hex Nut" },
-      "description": { "ko": "정밀 냉간단조 육각너트", "en": "Precision cold forged hex nut" },
-      "image": "/images/products/nut-001.jpg",
-      "specifications": {
-        "material": "SCM435",
-        "sizeRange": "M6~M24",
-        "standard": "KS/JIS"
+      "id": "mobility-steering-shaft",
+      "industry": { "ko": "전기차 · 모빌리티", "en": "EV · Mobility" },
+      "name": { "ko": "모빌리티 스티어링 샤프트", "en": "Mobility Steering Shaft" },
+      "description": {
+        "ko": "조향 및 제동 장치에 사용되는 초고강도 정밀 샤프트로, 4단 헤더 냉간단조로 제조합니다.",
+        "en": "Ultra-high-strength precision shaft for steering and braking systems, made by 4-station header cold forging."
       },
-      "featured": true,
+      "image": "/images/products/mobility-steering-shaft.jpg",
+      "specs": [
+        { "label": { "ko": "재질", "en": "Material" }, "value": "SCM435" },
+        { "label": { "ko": "공법", "en": "Process" }, "value": "4단 헤더 냉간단조" },
+        { "label": { "ko": "특징", "en": "Feature" }, "value": "초고강도 정밀" }
+      ],
       "order": 2
     },
     {
-      "id": "gear-001",
-      "category": "gear",
-      "name": { "ko": "기어", "en": "Gear" },
-      "description": { "ko": "자동차용 정밀 기어", "en": "Automotive precision gear" },
-      "image": "/images/products/gear-001.jpg",
-      "specifications": {
-        "material": "SCM420",
-        "sizeRange": "Φ20~Φ80",
-        "standard": "KS/JIS"
+      "id": "rf-telecom-component",
+      "industry": { "ko": "5G · 6G 통신", "en": "5G · 6G Telecom" },
+      "name": { "ko": "RF 통신 부품", "en": "RF Telecom Component" },
+      "description": {
+        "ko": "RF 증폭기·커넥터에 들어가는 마이크로 정밀 부품으로, 5μm급 극한 공차를 구현합니다.",
+        "en": "Micro-precision part for RF amplifiers and connectors, achieving extreme tolerances down to 5μm."
       },
-      "featured": true,
+      "image": "/images/products/rf-telecom-component.jpg",
+      "specs": [
+        { "label": { "ko": "재질", "en": "Material" }, "value": "황동(Brass) 외 비철" },
+        { "label": { "ko": "공차", "en": "Tolerance" }, "value": "5μm 급" },
+        { "label": { "ko": "특징", "en": "Feature" }, "value": "마이크로 정밀 핀" }
+      ],
       "order": 3
     }
   ]

@@ -52,9 +52,8 @@ function Header() {
       path: '/products',
       label: t('nav.products'),
       submenu: [
-        { path: '/products?category=bolt', label: lang === 'ko' ? '볼트' : 'Bolt' },
-        { path: '/products?category=nut', label: lang === 'ko' ? '너트' : 'Nut' },
-        { path: '/products?category=gear', label: lang === 'ko' ? '기어' : 'Gear' },
+        { path: '/products#strategic', label: lang === 'ko' ? '전략 제품' : 'Strategic Products' },
+        { path: '/products#applications', label: lang === 'ko' ? '적용 분야' : 'Applications' },
       ],
     },
     {
