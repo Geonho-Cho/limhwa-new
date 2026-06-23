@@ -121,10 +121,10 @@ export default function Careers() {
               : 'For employment inquiries, please contact us.'}
           </p>
           <p className="text-lg">
-            <span className="font-medium">Email:</span> hr@limhwa.co.kr
+            <span className="font-medium">Email:</span> sales@limhwa.com
           </p>
           <p className="text-lg">
-            <span className="font-medium">Tel:</span> 031-000-0000
+            <span className="font-medium">Tel:</span> 031-366-8585
           </p>
         </section>
       </div>

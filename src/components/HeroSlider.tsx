@@ -20,7 +20,7 @@ const slides: Slide[] = [
     id: 2,
     image: '/images/hero/slide2.jpg',
     title: ['정밀함으로', '신뢰를 만듭니다'],
-    subtitle: '30년 축적된 기술력과 품질의 자부심',
+    subtitle: '수십 년 축적된 기술력과 품질의 자부심',
   },
   {
     id: 3,

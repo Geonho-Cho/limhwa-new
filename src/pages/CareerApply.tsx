@@ -52,7 +52,7 @@ export default function CareerApply() {
         : `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nDepartment: ${formData.department}\n\nIntroduction:\n${formData.message}\n\n※ Please attach your resume to this email.`
     )
 
-    window.location.href = `mailto:hr@limhwa.co.kr?subject=${subject}&body=${body}`
+    window.location.href = `mailto:sales@limhwa.com?subject=${subject}&body=${body}`
     setIsSubmitted(true)
   }
 
@@ -79,7 +79,7 @@ export default function CareerApply() {
               : 'Please attach your resume and send the email.'}
           </p>
           <p className="text-gray-500 text-sm mb-8">
-            hr@limhwa.co.kr
+            sales@limhwa.com
           </p>
           <button
             onClick={() => navigate('/careers')}
