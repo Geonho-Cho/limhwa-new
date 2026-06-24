@@ -1,45 +1,56 @@
 {
-  "products": [
+  "standardProducts": [
     {
-      "id": "bolt-001",
-      "category": "bolt",
-      "name": { "ko": "육각볼트", "en": "Hex Bolt" },
-      "description": { "ko": "고강도 냉간단조 육각볼트", "en": "High-strength cold forged hex bolt" },
-      "image": "/images/products/bolt-001.jpg",
-      "specifications": {
-        "material": "SCM435",
-        "sizeRange": "M6~M24",
-        "standard": "KS/JIS"
-      },
-      "featured": true,
+      "id": "standard-1",
+      "name": { "ko": "일반품 1 (예시)", "en": "Standard 1" },
+      "image": "/images/products/standard-1.jpg",
+      "specs": [
+        { "label": { "ko": "규격/사이즈", "en": "Size" }, "value": "예: M6 ~ M20" }
+      ],
       "order": 1
     },
     {
-      "id": "nut-001",
-      "category": "nut",
-      "name": { "ko": "육각너트", "en": "Hex Nut" },
-      "description": { "ko": "정밀 냉간단조 육각너트", "en": "Precision cold forged hex nut" },
-      "image": "/images/products/nut-001.jpg",
-      "specifications": {
-        "material": "SCM435",
-        "sizeRange": "M6~M24",
-        "standard": "KS/JIS"
-      },
-      "featured": true,
+      "id": "standard-2",
+      "name": { "ko": "일반품 2 (예시)", "en": "Standard 2" },
+      "image": "/images/products/standard-2.jpg",
+      "specs": [
+        { "label": { "ko": "규격/사이즈", "en": "Size" }, "value": "예: Ø8 ~ Ø30" }
+      ],
       "order": 2
     },
     {
-      "id": "gear-001",
-      "category": "gear",
-      "name": { "ko": "기어", "en": "Gear" },
-      "description": { "ko": "자동차용 정밀 기어", "en": "Automotive precision gear" },
-      "image": "/images/products/gear-001.jpg",
-      "specifications": {
-        "material": "SCM420",
-        "sizeRange": "Φ20~Φ80",
-        "standard": "KS/JIS"
-      },
-      "featured": true,
+      "id": "standard-3",
+      "name": { "ko": "일반품 3 (예시)", "en": "Standard 3" },
+      "image": "/images/products/standard-3.jpg",
+      "specs": [
+        { "label": { "ko": "규격/사이즈", "en": "Size" }, "value": "예: M10 ~ M24" }
+      ],
+      "order": 3
+    }
+  ],
+  "specialProducts": [
+    {
+      "id": "special-1",
+      "name": { "ko": "특수품 1 (예시)", "en": "Special 1" },
+      "description": { "ko": "고객 맞춤 사양으로 제작되는 특수 부품입니다.", "en": "Custom special part made to customer specifications." },
+      "image": "/images/products/special-1.jpg",
+      "materials": ["무산소동", "황동", "구리"],
+      "order": 1
+    },
+    {
+      "id": "special-2",
+      "name": { "ko": "특수품 2 (예시)", "en": "Special 2" },
+      "description": { "ko": "고객 맞춤 사양으로 제작되는 특수 부품입니다.", "en": "Custom special part made to customer specifications." },
+      "image": "/images/products/special-2.jpg",
+      "materials": ["알루미늄", "스테인리스"],
+      "order": 2
+    },
+    {
+      "id": "special-3",
+      "name": { "ko": "특수품 3 (예시)", "en": "Special 3" },
+      "description": { "ko": "고객 맞춤 사양으로 제작되는 특수 부품입니다.", "en": "Custom special part made to customer specifications." },
+      "image": "/images/products/special-3.jpg",
+      "materials": ["무산소동", "황동", "구리", "알루미늄", "스테인리스"],
       "order": 3
     }
   ]
