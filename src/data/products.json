@@ -1,51 +1,56 @@
 {
-  "strategicProducts": [
+  "standardProducts": [
     {
-      "id": "ev-battery-terminal",
-      "industry": { "ko": "전기차 · 모빌리티", "en": "EV · Mobility" },
-      "name": { "ko": "EV 배터리 파워 터미널", "en": "EV Battery Power Terminal" },
-      "description": {
-        "ko": "전기차 배터리 팩 내부 전력 연결에 사용되는 고전도성 비철 냉간단조 부품입니다.",
-        "en": "High-conductivity non-ferrous cold-forged part for power connections inside EV battery packs."
-      },
-      "image": "/images/products/ev-battery-terminal.jpg",
+      "id": "standard-1",
+      "name": { "ko": "일반품 1 (예시)", "en": "Standard 1" },
+      "image": "/images/products/standard-1.jpg",
       "specs": [
-        { "label": { "ko": "재질", "en": "Material" }, "value": "C1020 무산소동(OFC)" },
-        { "label": { "ko": "공법", "en": "Process" }, "value": "고전도성 비철 냉간단조" },
-        { "label": { "ko": "특징", "en": "Feature" }, "value": "고전도 · 고강도" }
+        { "label": { "ko": "규격/사이즈", "en": "Size" }, "value": "예: M6 ~ M20" }
       ],
       "order": 1
     },
     {
-      "id": "mobility-steering-shaft",
-      "industry": { "ko": "전기차 · 모빌리티", "en": "EV · Mobility" },
-      "name": { "ko": "모빌리티 스티어링 샤프트", "en": "Mobility Steering Shaft" },
-      "description": {
-        "ko": "조향 및 제동 장치에 사용되는 초고강도 정밀 샤프트로, 4단 헤더 냉간단조로 제조합니다.",
-        "en": "Ultra-high-strength precision shaft for steering and braking systems, made by 4-station header cold forging."
-      },
-      "image": "/images/products/mobility-steering-shaft.jpg",
+      "id": "standard-2",
+      "name": { "ko": "일반품 2 (예시)", "en": "Standard 2" },
+      "image": "/images/products/standard-2.jpg",
       "specs": [
-        { "label": { "ko": "재질", "en": "Material" }, "value": "SCM435" },
-        { "label": { "ko": "공법", "en": "Process" }, "value": "4단 헤더 냉간단조" },
-        { "label": { "ko": "특징", "en": "Feature" }, "value": "초고강도 정밀" }
+        { "label": { "ko": "규격/사이즈", "en": "Size" }, "value": "예: Ø8 ~ Ø30" }
       ],
       "order": 2
     },
     {
-      "id": "rf-telecom-component",
-      "industry": { "ko": "5G · 6G 통신", "en": "5G · 6G Telecom" },
-      "name": { "ko": "RF 통신 부품", "en": "RF Telecom Component" },
-      "description": {
-        "ko": "RF 증폭기·커넥터에 들어가는 마이크로 정밀 부품으로, 5μm급 극한 공차를 구현합니다.",
-        "en": "Micro-precision part for RF amplifiers and connectors, achieving extreme tolerances down to 5μm."
-      },
-      "image": "/images/products/rf-telecom-component.jpg",
+      "id": "standard-3",
+      "name": { "ko": "일반품 3 (예시)", "en": "Standard 3" },
+      "image": "/images/products/standard-3.jpg",
       "specs": [
-        { "label": { "ko": "재질", "en": "Material" }, "value": "황동(Brass) 외 비철" },
-        { "label": { "ko": "공차", "en": "Tolerance" }, "value": "5μm 급" },
-        { "label": { "ko": "특징", "en": "Feature" }, "value": "마이크로 정밀 핀" }
+        { "label": { "ko": "규격/사이즈", "en": "Size" }, "value": "예: M10 ~ M24" }
       ],
+      "order": 3
+    }
+  ],
+  "specialProducts": [
+    {
+      "id": "special-1",
+      "name": { "ko": "특수품 1 (예시)", "en": "Special 1" },
+      "description": { "ko": "고객 맞춤 사양으로 제작되는 특수 부품입니다.", "en": "Custom special part made to customer specifications." },
+      "image": "/images/products/special-1.jpg",
+      "materials": ["무산소동", "황동", "구리"],
+      "order": 1
+    },
+    {
+      "id": "special-2",
+      "name": { "ko": "특수품 2 (예시)", "en": "Special 2" },
+      "description": { "ko": "고객 맞춤 사양으로 제작되는 특수 부품입니다.", "en": "Custom special part made to customer specifications." },
+      "image": "/images/products/special-2.jpg",
+      "materials": ["알루미늄", "스테인리스"],
+      "order": 2
+    },
+    {
+      "id": "special-3",
+      "name": { "ko": "특수품 3 (예시)", "en": "Special 3" },
+      "description": { "ko": "고객 맞춤 사양으로 제작되는 특수 부품입니다.", "en": "Custom special part made to customer specifications." },
+      "image": "/images/products/special-3.jpg",
+      "materials": ["무산소동", "황동", "구리", "알루미늄", "스테인리스"],
       "order": 3
     }
   ]
