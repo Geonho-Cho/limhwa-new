@@ -1,57 +1,32 @@
 {
-  "standardProducts": [
-    {
-      "id": "standard-1",
-      "name": { "ko": "일반품 1 (예시)", "en": "Standard 1" },
-      "image": "/images/products/standard-1.jpg",
-      "specs": [
-        { "label": { "ko": "규격/사이즈", "en": "Size" }, "value": "예: M6 ~ M20" }
-      ],
-      "order": 1
+  "standard": {
+    "title": { "ko": "일반품", "en": "Standard Products" },
+    "description": {
+      "ko": "규격 기준의 양산 표준 부품입니다. 정밀 스크류·플랜지 볼트·핀류 등 다양한 형상을 폭넓은 규격으로 생산합니다.",
+      "en": "Mass-production standard parts — precision screws, flange bolts, pins and more, produced across a wide range of sizes."
     },
-    {
-      "id": "standard-2",
-      "name": { "ko": "일반품 2 (예시)", "en": "Standard 2" },
-      "image": "/images/products/standard-2.jpg",
-      "specs": [
-        { "label": { "ko": "규격/사이즈", "en": "Size" }, "value": "예: Ø8 ~ Ø30" }
-      ],
-      "order": 2
+    "specs": [
+      { "label": { "ko": "규격/사이즈", "en": "Size" }, "value": "M2 ~ M24" },
+      { "label": { "ko": "길이", "en": "Length" }, "value": "L5 ~ 160mm" }
+    ],
+    "items": [
+      { "image": "/images/products/standard-1.png", "label": { "ko": "볼트", "en": "Bolt" } },
+      { "image": "/images/products/standard-2.png", "label": { "ko": "스크류", "en": "Screw" } },
+      { "image": "/images/products/standard-3.png", "label": { "ko": "스크류", "en": "Screw" } },
+      { "image": "/images/products/standard-4.png", "label": { "ko": "리벳", "en": "Rivet" } }
+    ]
+  },
+  "special": {
+    "title": { "ko": "특수품", "en": "Special Products" },
+    "description": {
+      "ko": "고객 도면·사양에 맞춰 제작하는 맞춤 단조 부품입니다. 동·알루미늄 등 특수 비철 소재와 이형 형상까지 정밀 냉간단조로 가공합니다.",
+      "en": "Custom-forged parts made to your drawings and specifications — special non-ferrous metals such as copper and aluminum, and profiled shapes, all by precision cold forging."
     },
-    {
-      "id": "standard-3",
-      "name": { "ko": "일반품 3 (예시)", "en": "Standard 3" },
-      "image": "/images/products/standard-3.jpg",
-      "specs": [
-        { "label": { "ko": "규격/사이즈", "en": "Size" }, "value": "예: M10 ~ M24" }
-      ],
-      "order": 3
-    }
-  ],
-  "specialProducts": [
-    {
-      "id": "special-1",
-      "name": { "ko": "특수품 1 (예시)", "en": "Special 1" },
-      "description": { "ko": "고객 맞춤 사양으로 제작되는 특수 부품입니다.", "en": "Custom special part made to customer specifications." },
-      "image": "/images/products/special-1.jpg",
-      "materials": ["무산소동", "황동", "구리"],
-      "order": 1
-    },
-    {
-      "id": "special-2",
-      "name": { "ko": "특수품 2 (예시)", "en": "Special 2" },
-      "description": { "ko": "고객 맞춤 사양으로 제작되는 특수 부품입니다.", "en": "Custom special part made to customer specifications." },
-      "image": "/images/products/special-2.jpg",
-      "materials": ["알루미늄", "스테인리스"],
-      "order": 2
-    },
-    {
-      "id": "special-3",
-      "name": { "ko": "특수품 3 (예시)", "en": "Special 3" },
-      "description": { "ko": "고객 맞춤 사양으로 제작되는 특수 부품입니다.", "en": "Custom special part made to customer specifications." },
-      "image": "/images/products/special-3.jpg",
-      "materials": ["무산소동", "황동", "구리", "알루미늄", "스테인리스"],
-      "order": 3
-    }
-  ]
+    "items": [
+      { "image": "/images/products/special-1.png", "label": { "ko": "동 (단조)", "en": "Copper (Forged)" } },
+      { "image": "/images/products/special-2.png", "label": { "ko": "알루미늄 (단조)", "en": "Aluminum (Forged)" } },
+      { "image": "/images/products/special-3.png", "label": { "ko": "이형제품 (단조)", "en": "Profiled Part (Forged)" } },
+      { "image": "/images/products/special-4.png", "label": { "ko": "이형제품 (단조)", "en": "Profiled Part (Forged)" } }
+    ]
+  }
 }

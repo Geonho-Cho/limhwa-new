@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import PageBanner from '../components/PageBanner'
@@ -9,23 +8,25 @@ interface Spec {
   value: string
 }
 
-// 일반품 — 생산 스펙(규격/사이즈 등)을 가짐
-interface StandardProduct {
-  id: string
-  name: { ko: string; en: string }
+// 사진 + 캡션 1장 (일반품·특수품 공용)
+interface PhotoItem {
   image: string
-  specs: Spec[]
-  order: number
+  label: { ko: string; en: string }
 }
 
-// 특수품 — 가능 소재 목록을 가짐
-interface SpecialProduct {
-  id: string
-  name: { ko: string; en: string }
-  description?: { ko: string; en: string }
-  image: string
-  materials: string[]
-  order: number
+// 일반품 — 폭넓은 규격의 양산 표준 부품(공통 스펙 + 사진 갤러리)
+interface Standard {
+  title: { ko: string; en: string }
+  description: { ko: string; en: string }
+  specs: Spec[]
+  items: PhotoItem[]
+}
+
+// 특수품 — 맞춤 단조 부품 사진 갤러리
+interface Special {
+  title: { ko: string; en: string }
+  description: { ko: string; en: string }
+  items: PhotoItem[]
 }
 
 // 적용 분야 아이콘 박스 컬러 테마 — Tailwind가 인식하도록 클래스명을 완전한 문자열로 정의
@@ -101,8 +102,8 @@ const applications = [
 export default function Products() {
   const { i18n } = useTranslation()
   const lang = i18n.language as 'ko' | 'en'
-  const standardProducts: StandardProduct[] = [...productsData.standardProducts].sort((a, b) => a.order - b.order)
-  const specialProducts: SpecialProduct[] = [...productsData.specialProducts].sort((a, b) => a.order - b.order)
+  const standard: Standard = productsData.standard
+  const special: Special = productsData.special
 
   return (
     <div className="min-h-screen">
@@ -158,36 +159,42 @@ export default function Products() {
         <div className="max-w-7xl mx-auto px-6 space-y-20">
           {/* 일반품 */}
           <div>
-            <div className="text-center mb-12">
+            <div className="text-center mb-10">
               <h2 className="heading-en text-sm text-accent mb-4">STANDARD PRODUCTS</h2>
-              <h3 className="text-3xl font-bold">{lang === 'ko' ? '일반품' : 'Standard Products'}</h3>
-              <p className="section-subtitle mt-4">
-                {lang === 'ko'
-                  ? '규격 · 사이즈 기준의 양산 표준 부품'
-                  : 'Mass-production standard parts, organized by size and spec'}
-              </p>
+              <h3 className="text-3xl font-bold">{standard.title[lang]}</h3>
+              <p className="section-subtitle mt-4">{standard.description[lang]}</p>
+              {/* 규격 칩 — 전체 라인업에 공통 적용되는 생산 범위 */}
+              <div className="flex flex-wrap justify-center gap-3 mt-6">
+                {standard.specs.map((spec, i) => (
+                  <span
+                    key={i}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-sm"
+                  >
+                    <span className="text-gray-500">{spec.label[lang]}</span>
+                    <span className="font-semibold text-primary">{spec.value}</span>
+                  </span>
+                ))}
+              </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {standardProducts.map((product) => (
-                <StandardCard key={product.id} product={product} lang={lang} />
+            {/* 라인업 갤러리 — 가로 라인업 샷이라 넓은 카드로 전체가 보이게 (전체 폭은 살짝 좁혀 가운데 정렬) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {standard.items.map((item, i) => (
+                <PhotoCard key={i} src={item.image} alt={item.label[lang]} caption={item.label[lang]} />
               ))}
             </div>
           </div>
 
           {/* 특수품 */}
           <div>
-            <div className="text-center mb-12">
+            <div className="text-center mb-10">
               <h2 className="heading-en text-sm text-accent mb-4">SPECIAL PRODUCTS</h2>
-              <h3 className="text-3xl font-bold">{lang === 'ko' ? '특수품' : 'Special Products'}</h3>
-              <p className="section-subtitle mt-4">
-                {lang === 'ko'
-                  ? '가능 소재 기준의 고객 맞춤 특수 부품'
-                  : 'Custom special parts, organized by available materials'}
-              </p>
+              <h3 className="text-3xl font-bold">{special.title[lang]}</h3>
+              <p className="section-subtitle mt-4">{special.description[lang]}</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {specialProducts.map((product) => (
-                <SpecialCard key={product.id} product={product} lang={lang} />
+            {/* 맞춤 부품 갤러리 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {special.items.map((item, i) => (
+                <PhotoCard key={i} src={item.image} alt={item.label[lang]} caption={item.label[lang]} />
               ))}
             </div>
           </div>
@@ -244,86 +251,20 @@ export default function Products() {
   )
 }
 
-// 제품 이미지 — 이미지가 없으면 placeholder(아이콘 + 제품명) 표시
-function ProductImage({ src, alt }: { src: string; alt: string }) {
-  const [imageError, setImageError] = useState(false)
-
+// 제품 사진 카드 — 안쪽 테두리 액자 + 여백으로 사진을 살짝 줄여 표시, 아래 캡션 (일반품·특수품 공용)
+function PhotoCard({ src, alt, caption }: { src: string; alt: string; caption?: string }) {
   return (
-    <div className="h-56 bg-gray-50 flex items-center justify-center relative overflow-hidden">
-      {imageError ? (
-        <div className="text-center text-gray-400 px-4">
-          <svg className="w-14 h-14 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-          <span className="text-sm">{alt}</span>
-        </div>
-      ) : (
+    <div className="group bg-white rounded-2xl shadow-lg border border-gray-100 hover-card p-3">
+      <div className="aspect-[3/2] bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
         <img
           src={src}
           alt={alt}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-          onError={() => setImageError(true)}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
+      </div>
+      {caption && (
+        <p className="mt-3 mb-1 text-center font-semibold text-gray-800">{caption}</p>
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-    </div>
-  )
-}
-
-// 일반품 카드 — 생산 스펙(규격/사이즈 등) 표시
-function StandardCard({ product, lang }: { product: StandardProduct; lang: 'ko' | 'en' }) {
-  return (
-    <div className="bg-white w-full rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover-card flex flex-col h-full group">
-      <ProductImage src={product.image} alt={product.name[lang]} />
-      <div className="p-6 flex flex-col flex-1">
-        <span className="inline-block self-start px-3 py-1 text-xs font-medium bg-gray-100 text-gray-600 rounded-full mb-3">
-          {lang === 'ko' ? '일반품' : 'Standard'}
-        </span>
-        <h3 className="text-lg font-bold text-gray-800 mb-4">{product.name[lang]}</h3>
-        <div className="mt-auto border-t pt-4">
-          <p className="heading-en text-xs text-accent mb-2">{lang === 'ko' ? '생산 스펙' : 'Production Spec'}</p>
-          <div className="space-y-2 text-sm">
-            {product.specs.map((spec, i) => (
-              <div key={i} className="flex justify-between gap-2">
-                <span className="text-gray-500 shrink-0">{spec.label[lang]}</span>
-                <span className="font-medium text-right">{spec.value || '—'}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-// 특수품 카드 — 가능 소재를 태그(알약)로 표시
-function SpecialCard({ product, lang }: { product: SpecialProduct; lang: 'ko' | 'en' }) {
-  return (
-    <div className="bg-white w-full rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover-card flex flex-col h-full group">
-      <ProductImage src={product.image} alt={product.name[lang]} />
-      <div className="p-6 flex flex-col flex-1">
-        <span className="inline-block self-start px-3 py-1 text-xs font-medium bg-accent/10 text-accent rounded-full mb-3">
-          {lang === 'ko' ? '특수품' : 'Special'}
-        </span>
-        <h3 className="text-lg font-bold text-gray-800 mb-2">{product.name[lang]}</h3>
-        {product.description && (
-          <p className="text-gray-600 text-sm mb-4 flex-1">{product.description[lang]}</p>
-        )}
-        <div className="mt-auto border-t pt-4">
-          <p className="heading-en text-xs text-accent mb-2">{lang === 'ko' ? '가능 소재' : 'Available Materials'}</p>
-          <div className="flex flex-wrap gap-2">
-            {product.materials.length === 0 ? (
-              <span className="text-sm text-gray-400">—</span>
-            ) : (
-              product.materials.map((m, i) => (
-                <span key={i} className="px-2.5 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded-full">
-                  {m}
-                </span>
-              ))
-            )}
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
