@@ -183,6 +183,7 @@ body {
 .page-banner {
   position: relative;
   height: 280px;
+  padding-top: 80px; /* 상단 고정 헤더(h-20 = 80px)에 가려지지 않도록 — 텍스트가 보이는 배너 영역 중앙에 오게 함 */
   display: flex;
   flex-direction: column;
   justify-content: center;
