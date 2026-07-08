@@ -45,6 +45,7 @@ function Header() {
       submenu: [
         { path: '/about#greeting', label: lang === 'ko' ? '인사말' : 'Greetings' },
         { path: '/about#history', label: lang === 'ko' ? '연혁' : 'History' },
+        { path: '/about#certifications', label: lang === 'ko' ? '인증현황' : 'Certifications' },
         { path: '/about#location', label: lang === 'ko' ? '오시는 길' : 'Location' },
       ],
     },

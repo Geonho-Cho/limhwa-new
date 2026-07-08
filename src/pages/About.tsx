@@ -120,7 +120,7 @@ export default function About() {
       </section>
 
       {/* 인증현황 */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50" id="certifications">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="heading-en text-sm text-accent mb-4">CERTIFICATION</h2>
