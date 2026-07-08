@@ -101,8 +101,8 @@ export default function Quote() {
     <div className="min-h-screen">
       {/* 페이지 배너 */}
       <PageBanner
-        title={lang === 'ko' ? '온라인 문의' : 'Online Inquiry'}
-        titleEn="Contact Us"
+        title={lang === 'ko' ? '견적 문의' : 'Quote Inquiry'}
+        titleEn="Request a Quote"
         breadcrumb={[
           { label: 'HOME', path: '/' },
           { label: 'CONTACT' },
@@ -307,18 +307,21 @@ export default function Quote() {
               accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx,.zip,.rar,.dwg,.dxf,.step,.stp,.igs,.iges"
             />
             {/* 대용량·첨부 실패 시 안내 */}
-            <div className="mt-3 rounded-lg bg-blue-50 border border-blue-100 p-4 text-sm text-gray-600">
+            <div className="mt-3 rounded-lg bg-blue-50 border border-blue-100 p-5 text-sm text-gray-600">
+              <p className="text-base font-semibold text-gray-800 mb-2">
+                {lang === 'ko' ? '📎 도면·모델링 파일 안내' : '📎 Sending Drawings / Model Files'}
+              </p>
               <p>
                 {lang === 'ko'
-                  ? '도면·모델링 파일은 위에서 바로 첨부하실 수 있습니다.'
-                  : 'You can attach drawings / model files directly above.'}
+                  ? '· 도면·모델링 파일은 위 「도면/파일 첨부」에서 바로 올려주실 수 있습니다. (합계 10MB 이하)'
+                  : '· You can upload drawings / model files directly in the field above (up to 10MB total).'}
               </p>
               <p className="mt-1">
                 {lang === 'ko'
-                  ? '파일이 크거나 첨부가 되지 않는 경우, 아래 이메일로 보내주시면 감사하겠습니다.'
-                  : "If your files are too large or won't upload, please email them to us."}
+                  ? '· 파일이 크거나 첨부가 되지 않는 경우, 아래 이메일로 보내주시면 감사하겠습니다.'
+                  : "· If your files are too large or won't upload, please email them to the address below."}
               </p>
-              <p className="mt-1 font-medium text-primary">sales@limhwa.com</p>
+              <p className="mt-3 text-center text-base font-semibold text-primary">sales@limhwa.com</p>
             </div>
           </div>
 
