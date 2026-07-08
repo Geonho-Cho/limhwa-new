@@ -121,7 +121,7 @@ export default function Careers() {
               : 'For employment inquiries, please contact us.'}
           </p>
           <p className="text-lg">
-            <span className="font-medium">Email:</span> sales@limhwa.com
+            <span className="font-medium">Email:</span> team@limhwa.com
           </p>
           <p className="text-lg">
             <span className="font-medium">Tel:</span> 031-366-8585

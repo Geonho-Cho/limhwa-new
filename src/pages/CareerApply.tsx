@@ -12,12 +12,18 @@ interface FormData {
   message: string
 }
 
+// FormSubmit 전송 주소 (채용지원 → team@limhwa.com).
+// ⚠️ 첫 제출 시 team@limhwa.com 으로 오는 "활성화 확인" 메일의 링크를 클릭해야 실제 배달이 시작됩니다.
+// 활성화 후 랜덤 해시 주소(https://formsubmit.co/xxxxxxxx)로 교체하면 소스에 이메일이 노출되지 않습니다.
+const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/team@limhwa.com'
+
 export default function CareerApply() {
   const { i18n } = useTranslation()
   const lang = i18n.language as 'ko' | 'en'
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const positionId = searchParams.get('position')
+  const submitted = searchParams.get('submitted') === '1'
 
   const { positions } = careersData.careers
   const departments = [...new Set(positions.map(p => p.department[lang]))]
@@ -31,32 +37,20 @@ export default function CareerApply() {
     department: matchedPosition?.department[lang] || '',
     message: '',
   })
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-
-    // mailto link with form data
-    const subject = encodeURIComponent(
-      lang === 'ko'
-        ? `[입사지원] ${formData.department} - ${formData.name}`
-        : `[Job Application] ${formData.department} - ${formData.name}`
-    )
-    const body = encodeURIComponent(
-      lang === 'ko'
-        ? `이름: ${formData.name}\n이메일: ${formData.email}\n연락처: ${formData.phone}\n지원부서: ${formData.department}\n\n자기소개:\n${formData.message}\n\n※ 이력서는 이 메일에 첨부하여 보내주세요.`
-        : `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nDepartment: ${formData.department}\n\nIntroduction:\n${formData.message}\n\n※ Please attach your resume to this email.`
-    )
-
-    window.location.href = `mailto:sales@limhwa.com?subject=${subject}&body=${body}`
-    setIsSubmitted(true)
+  const handleSubmit = () => {
+    // required 속성으로 브라우저가 필수값을 검증한 뒤, FormSubmit으로 전송(이력서 첨부 포함)하고
+    // _next 주소(?submitted=1)로 되돌아온다.
+    setIsSubmitting(true)
   }
 
-  if (isSubmitted) {
+  // 제출 후 ?submitted=1 로 돌아왔을 때 — 접수 완료 화면
+  if (submitted) {
     return (
       <div className="min-h-screen">
         <PageBanner
@@ -71,15 +65,15 @@ export default function CareerApply() {
         <div className="max-w-2xl mx-auto px-6 py-20 text-center">
           <div className="text-6xl mb-6">&#9993;</div>
           <h2 className="text-2xl font-bold text-primary mb-4">
-            {lang === 'ko' ? '이메일 앱이 열렸습니다' : 'Email App Opened'}
+            {lang === 'ko' ? '지원이 접수되었습니다' : 'Application Received'}
           </h2>
           <p className="text-gray-600 mb-2">
             {lang === 'ko'
-              ? '이력서를 첨부하여 메일을 발송해주세요.'
-              : 'Please attach your resume and send the email.'}
+              ? '소중한 지원에 감사드립니다. 검토 후 개별적으로 연락드리겠습니다.'
+              : 'Thank you for your application. We will contact you individually after review.'}
           </p>
           <p className="text-gray-500 text-sm mb-8">
-            sales@limhwa.com
+            team@limhwa.com
           </p>
           <button
             onClick={() => navigate('/careers')}
@@ -116,7 +110,28 @@ export default function CareerApply() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form
+          action={FORMSUBMIT_ENDPOINT}
+          method="POST"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
+          className="space-y-6"
+        >
+          {/* FormSubmit 설정 (화면에 보이지 않는 항목) */}
+          <input type="hidden" name="_subject" defaultValue="[임화금속 홈페이지] 새 입사지원" />
+          <input type="hidden" name="_template" defaultValue="table" />
+          <input type="hidden" name="_captcha" defaultValue="false" />
+          <input
+            type="hidden"
+            name="_next"
+            defaultValue={typeof window !== 'undefined' ? `${window.location.origin}/careers/apply?submitted=1` : ''}
+          />
+          {matchedPosition && (
+            <input type="hidden" name="지원포지션" defaultValue={`${matchedPosition.title[lang]} - ${matchedPosition.department[lang]}`} />
+          )}
+          {/* 스팸봇 함정 — 사람에겐 보이지 않는 칸 */}
+          <input type="text" name="_honeypot" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
           {/* Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -187,25 +202,27 @@ export default function CareerApply() {
             </select>
           </div>
 
-          {/* Resume */}
+          {/* Resume (이력서 첨부 — FormSubmit, 합계 10MB까지) */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="attachment" className="block text-sm font-medium text-gray-700 mb-2">
               {lang === 'ko' ? '이력서 첨부' : 'Resume'}
               <span className="text-gray-400 font-normal ml-1">
-                ({lang === 'ko' ? '메일에 직접 첨부' : 'Attach via email'})
+                ({lang === 'ko' ? '선택 · 합계 10MB 이하' : 'Optional · up to 10MB total'})
               </span>
             </label>
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-              <svg className="w-10 h-10 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              <p className="text-gray-500 text-sm">
-                {lang === 'ko'
-                  ? '지원하기 클릭 시 메일 앱이 열립니다. 이력서를 메일에 첨부해주세요.'
-                  : 'Click Apply to open your email app. Please attach your resume to the email.'}
-              </p>
-              <p className="text-gray-400 text-xs mt-1">PDF, DOC, DOCX (10MB)</p>
-            </div>
+            <input
+              type="file"
+              id="attachment"
+              name="attachment"
+              multiple
+              accept=".pdf,.doc,.docx,.hwp,.jpg,.jpeg,.png,.zip"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none"
+            />
+            <p className="text-gray-400 text-xs mt-1">
+              {lang === 'ko'
+                ? 'PDF, DOC, DOCX, HWP 등 · 파일이 크거나 첨부가 되지 않는 경우 team@limhwa.com 으로 보내주시면 감사하겠습니다.'
+                : "PDF, DOC, DOCX, etc. · If the file is too large or won't upload, please email it to team@limhwa.com."}
+            </p>
           </div>
 
           {/* Message */}
@@ -234,9 +251,12 @@ export default function CareerApply() {
             </button>
             <button
               type="submit"
-              className="flex-1 bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-medium"
+              disabled={isSubmitting}
+              className={`flex-1 text-white px-6 py-3 rounded-lg transition-colors font-medium ${
+                isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary hover:bg-primary/90'
+              }`}
             >
-              {lang === 'ko' ? '지원하기' : 'Apply'}
+              {isSubmitting ? (lang === 'ko' ? '전송 중...' : 'Sending...') : (lang === 'ko' ? '지원하기' : 'Apply')}
             </button>
           </div>
         </form>

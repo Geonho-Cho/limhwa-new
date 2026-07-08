@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useSearchParams } from 'react-router-dom'
 import PageBanner from '../components/PageBanner'
 
 interface FormData {
@@ -34,16 +35,21 @@ const productTypes = [
   { value: 'other', label: { ko: '기타', en: 'Other' } },
 ]
 
+// FormSubmit 전송 주소.
+// ⚠️ 첫 제출 시 sales@limhwa.com 으로 오는 "활성화 확인" 메일의 링크를 클릭해야 실제 배달이 시작됩니다.
+// 활성화 후 대시보드/확인메일에 나오는 랜덤 해시 주소(예: https://formsubmit.co/xxxxxxxx)로 교체하면
+// 소스코드에 회사 이메일이 노출되지 않습니다.
+const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/sales@limhwa.com'
+
 export default function Quote() {
   const { i18n } = useTranslation()
   const lang = i18n.language as 'ko' | 'en'
+  const [searchParams] = useSearchParams()
+  const submitted = searchParams.get('submitted') === '1'
 
   const [formData, setFormData] = useState<FormData>(initialFormData)
   const [errors, setErrors] = useState<FormErrors>({})
-  const [files, setFiles] = useState<File[]>([])
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitResult, setSubmitResult] = useState<{ success: boolean; message: string } | null>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {}
@@ -76,80 +82,19 @@ export default function Quote() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-    // 입력 시 해당 필드 에러 제거
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: '' }))
     }
   }
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = Array.from(e.target.files || [])
-    const maxFiles = 5
-    const maxSize = 10 * 1024 * 1024 // 10MB
-
-    // 파일 개수 체크
-    if (files.length + selectedFiles.length > maxFiles) {
-      alert(lang === 'ko' ? `파일은 최대 ${maxFiles}개까지 첨부할 수 있습니다.` : `Maximum ${maxFiles} files allowed.`)
+  // 검증 실패 시에만 제출을 막는다. 통과하면 브라우저가 FormSubmit으로 그대로 전송(파일 첨부 포함)하고
+  // _next 주소(우리 사이트 ?submitted=1)로 되돌아온다.
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (!validate()) {
+      e.preventDefault()
       return
     }
-
-    // 파일 크기 체크
-    const validFiles = selectedFiles.filter((file) => {
-      if (file.size > maxSize) {
-        alert(lang === 'ko' ? `${file.name}: 파일 크기는 10MB를 초과할 수 없습니다.` : `${file.name}: File size exceeds 10MB.`)
-        return false
-      }
-      return true
-    })
-
-    setFiles((prev) => [...prev, ...validFiles])
-  }
-
-  const removeFile = (index: number) => {
-    setFiles((prev) => prev.filter((_, i) => i !== index))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitResult(null)
-
-    if (!validate()) return
-
     setIsSubmitting(true)
-
-    try {
-      const formDataToSend = new FormData()
-      Object.entries(formData).forEach(([key, value]) => {
-        formDataToSend.append(key, value)
-      })
-      files.forEach((file) => {
-        formDataToSend.append('files', file)
-      })
-
-      const response = await fetch('http://localhost:3001/api/quote', {
-        method: 'POST',
-        body: formDataToSend,
-      })
-
-      const result = await response.json()
-
-      if (result.success) {
-        setSubmitResult({ success: true, message: result.message })
-        // 폼 초기화
-        setFormData(initialFormData)
-        setFiles([])
-        if (fileInputRef.current) fileInputRef.current.value = ''
-      } else {
-        setSubmitResult({ success: false, message: result.message })
-      }
-    } catch (error) {
-      setSubmitResult({
-        success: false,
-        message: lang === 'ko' ? '서버 연결에 실패했습니다. 잠시 후 다시 시도해주세요.' : 'Server connection failed. Please try again later.',
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
   }
 
   return (
@@ -174,19 +119,36 @@ export default function Quote() {
           </p>
         </div>
 
-        {/* 결과 메시지 */}
-        {submitResult && (
-          <div
-            className={`mb-6 p-4 rounded-lg ${
-              submitResult.success ? 'bg-green-100 text-green-800 border border-green-300' : 'bg-red-100 text-red-800 border border-red-300'
-            }`}
-          >
-            {submitResult.message}
+        {/* 접수 완료 메시지 (FormSubmit 제출 후 ?submitted=1 로 돌아왔을 때) */}
+        {submitted && (
+          <div className="mb-6 p-4 rounded-lg bg-green-100 text-green-800 border border-green-300">
+            {lang === 'ko'
+              ? '견적 요청이 정상적으로 접수되었습니다. 빠른 시일 내에 답변 드리겠습니다.'
+              : 'Your quote request has been received. We will respond as soon as possible.'}
           </div>
         )}
 
         {/* 폼 */}
-        <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-8">
+        <form
+          action={FORMSUBMIT_ENDPOINT}
+          method="POST"
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
+          noValidate
+          className="bg-white shadow-lg rounded-lg p-8"
+        >
+          {/* FormSubmit 설정 (화면에 보이지 않는 항목) */}
+          <input type="hidden" name="_subject" defaultValue="[임화금속 홈페이지] 새 견적문의" />
+          <input type="hidden" name="_template" defaultValue="table" />
+          <input type="hidden" name="_captcha" defaultValue="false" />
+          <input
+            type="hidden"
+            name="_next"
+            defaultValue={typeof window !== 'undefined' ? `${window.location.origin}/quote?submitted=1` : ''}
+          />
+          {/* 스팸봇 함정 — 사람에겐 보이지 않는 칸. 봇이 채우면 스팸으로 걸러진다. */}
+          <input type="text" name="_honeypot" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* 회사명 */}
             <div>
@@ -328,45 +290,36 @@ export default function Quote() {
             {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
           </div>
 
-          {/* 파일 첨부 */}
+          {/* 파일 첨부 (FormSubmit — 합계 10MB까지) */}
           <div className="mt-6">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="attachment" className="block text-sm font-medium text-gray-700 mb-1">
               {lang === 'ko' ? '도면/파일 첨부' : 'Attach Files'}
               <span className="text-gray-500 font-normal ml-2">
-                ({lang === 'ko' ? '최대 5개, 각 10MB 이하' : 'Max 5 files, 10MB each'})
+                ({lang === 'ko' ? '선택 · 합계 10MB 이하' : 'Optional · up to 10MB total'})
               </span>
             </label>
             <input
               type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
+              id="attachment"
+              name="attachment"
               multiple
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx,.zip,.rar,.dwg,.dxf,.step,.stp,.igs,.iges"
             />
-            <p className="mt-1 text-sm text-gray-500">
-              {lang === 'ko'
-                ? 'PDF, 이미지, 문서, CAD 파일(DWG, DXF, STEP 등) 가능'
-                : 'PDF, images, documents, CAD files (DWG, DXF, STEP, etc.)'}
-            </p>
-
-            {/* 첨부된 파일 목록 */}
-            {files.length > 0 && (
-              <div className="mt-3 space-y-2">
-                {files.map((file, index) => (
-                  <div key={index} className="flex items-center justify-between bg-gray-50 px-3 py-2 rounded">
-                    <span className="text-sm text-gray-700 truncate">{file.name}</span>
-                    <button
-                      type="button"
-                      onClick={() => removeFile(index)}
-                      className="text-red-500 hover:text-red-700 text-sm"
-                    >
-                      {lang === 'ko' ? '삭제' : 'Remove'}
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
+            {/* 대용량·첨부 실패 시 안내 */}
+            <div className="mt-3 rounded-lg bg-blue-50 border border-blue-100 p-4 text-sm text-gray-600">
+              <p>
+                {lang === 'ko'
+                  ? '도면·모델링 파일은 위에서 바로 첨부하실 수 있습니다.'
+                  : 'You can attach drawings / model files directly above.'}
+              </p>
+              <p className="mt-1">
+                {lang === 'ko'
+                  ? '파일이 크거나 첨부가 되지 않는 경우, 아래 이메일로 보내주시면 감사하겠습니다.'
+                  : "If your files are too large or won't upload, please email them to us."}
+              </p>
+              <p className="mt-1 font-medium text-primary">sales@limhwa.com</p>
+            </div>
           </div>
 
           {/* 제출 버튼 */}
@@ -395,7 +348,7 @@ export default function Quote() {
             {lang === 'ko' ? '급한 문의는 전화로 연락 주세요.' : 'For urgent inquiries, please call us.'}
           </p>
           <p className="mt-2 text-lg font-medium text-primary">
-            Tel: 031-123-4567
+            Tel: 031-366-8585
           </p>
         </div>
       </div>
