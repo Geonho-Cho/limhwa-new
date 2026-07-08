@@ -1,12 +1,29 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import PageBanner from '../components/PageBanner'
 import equipmentData from '../data/equipment.json'
 
+interface EqItem {
+  spec: string
+  qty: number
+}
+
+interface Process {
+  no: string
+  key: string
+  title: string
+  short: { ko: string; en: string }
+  subtitle: { ko: string; en: string }
+  maxSpec: string
+  photos?: string[]
+  items: EqItem[]
+}
+
 export default function Equipment() {
   const { i18n } = useTranslation()
   const lang = i18n.language as 'ko' | 'en'
-  const { equipment, inspection } = equipmentData
+  const processes = equipmentData.processes as Process[]
+
+  const totals = processes.map((p) => p.items.reduce((s, i) => s + i.qty, 0))
 
   return (
     <div className="min-h-screen">
@@ -22,83 +39,101 @@ export default function Equipment() {
       />
 
       <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* 설명 */}
-        <div className="text-center mb-12">
-          <p className="section-subtitle">
-            {lang === 'ko'
-              ? '최신 설비와 기술력으로 최고의 품질을 보장합니다.'
-              : 'Ensuring the highest quality with state-of-the-art equipment.'}
-          </p>
+        {/* 섹션 헤더 */}
+        <div className="flex items-center gap-3 mb-3">
+          <span className="w-1.5 h-7 bg-primary rounded-full" />
+          <h2 className="text-2xl md:text-3xl font-bold text-dark">
+            {lang === 'ko' ? '설비 보유 현황' : 'Equipment Holdings'}
+          </h2>
+          <span className="heading-en text-sm text-gray-400 font-semibold tracking-wider">
+            EQUIPMENT HOLDINGS
+          </span>
         </div>
+        <p className="text-gray-600 mb-10">
+          {lang === 'ko'
+            ? '최신 설비와 기술력으로 최고의 품질을 보장합니다.'
+            : 'Ensuring the highest quality with state-of-the-art equipment.'}
+        </p>
 
-        {/* 생산설비 */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold text-primary mb-8">
-            {lang === 'ko' ? '생산설비' : 'Production Equipment'}
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {[...equipment].sort((a, b) => a.order - b.order).map((item) => (
-              <EquipmentCard key={item.id} item={item} lang={lang} />
-            ))}
-          </div>
-        </section>
-
-        {/* 검사장비 */}
-        <section>
-          <h2 className="text-2xl font-bold text-primary mb-8">
-            {lang === 'ko' ? '검사/측정 장비' : 'Inspection Equipment'}
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {[...inspection].sort((a, b) => a.order - b.order).map((item) => (
-              <EquipmentCard key={item.id} item={item} lang={lang} />
-            ))}
-          </div>
-        </section>
+        {/* 3열 공정 — 사진(있으면) + 보유현황 카드 */}
+        <div className="grid md:grid-cols-3 gap-6 items-start">
+          {processes.map((p, i) => (
+            <div key={p.key}>
+              {p.photos && p.photos.length > 0 && (
+                <div className="space-y-4 mb-4">
+                  {p.photos.map((src, j) => (
+                    <div
+                      key={j}
+                      className="group aspect-[4/3] rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-gray-50"
+                    >
+                      <img
+                        src={src}
+                        alt={`${p.title} 설비 ${j + 1}`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              <ProcessCard p={p} total={totals[i]} lang={lang} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
 }
 
-function EquipmentCard({ item, lang }: {
-  item: any;
-  lang: 'ko' | 'en';
-}) {
-  const [imageError, setImageError] = useState(false)
+// 공정별 설비 보유 카드
+function ProcessCard({ p, total, lang }: { p: Process; total: number; lang: 'ko' | 'en' }) {
+  const maxQty = Math.max(...p.items.map((i) => i.qty))
 
   return (
-    <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover-card flex flex-col h-full group">
-      <div className="h-56 bg-gray-50 flex items-center justify-center relative overflow-hidden">
-        {imageError ? (
-          <div className="text-center text-gray-400">
-            <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
+    <div className="rounded-2xl border border-gray-200 shadow-sm overflow-hidden bg-white">
+      {/* 헤더 (다크) */}
+      <div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white px-6 py-5">
+        <div className="flex justify-between items-start">
+          <div>
+            <p className="heading-en text-xs text-blue-300 font-semibold tracking-widest mb-1">
+              PROCESS {p.no}
+            </p>
+            <h3 className="text-2xl font-bold leading-none">{p.title}</h3>
+            <p className="text-sm text-slate-300 mt-2">{p.subtitle[lang]}</p>
           </div>
-        ) : (
-          <img
-            src={item.image}
-            alt={item.name[lang]}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            onError={() => setImageError(true)}
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+          <div className="text-right shrink-0 pl-3">
+            <div className="text-4xl font-bold leading-none">{total}</div>
+            <div className="text-xs text-slate-300 mt-1">{lang === 'ko' ? '보유 대수' : 'units'}</div>
+          </div>
+        </div>
       </div>
-      <div className="p-6 flex-1 flex flex-col">
-        <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-primary transition-colors">{item.name[lang]}</h3>
-        <p className="text-gray-600 mb-6 flex-1">{item.description[lang]}</p>
-        {item.specs && (
-          <div className="border-t pt-4 space-y-3 text-sm bg-gray-50 -mx-6 -mb-6 p-6 mt-auto">
-            <div className="flex justify-between items-center">
-              <span className="text-gray-500 font-medium">{lang === 'ko' ? '장비 성능/규격' : 'Capacity'}</span>
-              <span className="font-bold text-dark bg-white px-3 py-1 rounded-md shadow-sm">{item.specs.capacity}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-gray-500 font-medium">{lang === 'ko' ? '보유수량' : 'Quantity'}</span>
-              <span className="font-bold text-primary">{item.specs.quantity}{lang === 'ko' ? '대' : ' units'}</span>
-            </div>
+
+      {/* 최대 규격 */}
+      <div className="flex justify-between items-center px-6 py-3.5 bg-slate-50 border-b border-gray-200">
+        <span className="text-sm text-gray-500">{lang === 'ko' ? '최대 규격' : 'Max spec'}</span>
+        <span className="text-sm font-semibold text-dark bg-white border border-gray-200 rounded-full px-3 py-1 shadow-sm">
+          {lang === 'ko' ? `최대 ${p.maxSpec}` : p.maxSpec}
+        </span>
+      </div>
+
+      {/* 규격별 보유 목록 (막대 배경) */}
+      <div>
+        {p.items.map((it, i) => (
+          <div
+            key={i}
+            className="relative flex justify-between items-center px-6 py-3 border-b border-gray-100 last:border-0"
+          >
+            {/* 수량 비례 막대 */}
+            <div
+              className="absolute inset-y-0 left-0 bg-blue-50"
+              style={{ width: `${(it.qty / maxQty) * 100}%` }}
+            />
+            <span className="relative text-sm text-gray-700">{it.spec}</span>
+            <span className="relative text-sm font-semibold text-primary">
+              {it.qty}
+              <span className="text-gray-400 font-normal">{lang === 'ko' ? '대' : ''}</span>
+            </span>
           </div>
-        )}
+        ))}
       </div>
     </div>
   )

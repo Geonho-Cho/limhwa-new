@@ -1,26 +1,64 @@
 {
-  "equipment": [
+  "processes": [
     {
-      "id": "heading-001",
-      "name": { "ko": "냉간헤딩기", "en": "Cold Heading Machine" },
-      "description": { "ko": "고속 냉간단조를 위한 헤딩머신", "en": "Heading machine for high-speed cold forging" },
-      "image": "/images/equipment/heading-001.jpg",
-      "specs": {
-        "capacity": "최대 M24",
-        "quantity": 5
-      },
-      "order": 1
+      "no": "01",
+      "key": "former",
+      "title": "FORMER",
+      "short": { "ko": "포머", "en": "Former" },
+      "subtitle": { "ko": "포머 · 다단압조", "en": "Former · Multi-stage forging" },
+      "maxSpec": "M24 6D-6B",
+      "photos": ["/images/equipment/former-1.jpg", "/images/equipment/former-2.jpg"],
+      "items": [
+        { "spec": "M24 6D-6B", "qty": 1 },
+        { "spec": "M18 6D-6B", "qty": 1 },
+        { "spec": "M10 6D-6B", "qty": 1 },
+        { "spec": "M10 5D-5B", "qty": 1 },
+        { "spec": "M10 4D-4B", "qty": 3 },
+        { "spec": "M10 3D-3B", "qty": 2 },
+        { "spec": "M6 4D-4B", "qty": 1 },
+        { "spec": "M6 3D-3B", "qty": 1 }
+      ]
     },
     {
-      "id": "former-001",
-      "name": { "ko": "볼트포밍기", "en": "Bolt Former" },
-      "description": { "ko": "다단 볼트 성형기", "en": "Multi-stage bolt former" },
-      "image": "/images/equipment/former-001.jpg",
-      "specs": {
-        "capacity": "최대 M16",
-        "quantity": 3
-      },
-      "order": 2
+      "no": "02",
+      "key": "heading",
+      "title": "HEADING",
+      "short": { "ko": "헤딩", "en": "Heading" },
+      "subtitle": { "ko": "헤딩 · 단조 성형", "en": "Heading · Forging" },
+      "maxSpec": "M12 2D-3B",
+      "photos": ["/images/equipment/heading-1.jpg", "/images/equipment/heading-2.jpg"],
+      "items": [
+        { "spec": "M12 2D-3B", "qty": 1 },
+        { "spec": "M10 RH", "qty": 1 },
+        { "spec": "M8 2D-3B", "qty": 3 },
+        { "spec": "M8 2D-2B", "qty": 2 },
+        { "spec": "M6 2D-3B", "qty": 4 },
+        { "spec": "M6 2D-2B", "qty": 1 },
+        { "spec": "M5 2D-3B", "qty": 2 },
+        { "spec": "M5 1D-2B", "qty": 3 },
+        { "spec": "M4.5 2D-2B", "qty": 1 },
+        { "spec": "M4 2D-3B", "qty": 1 },
+        { "spec": "M4 2D-2B", "qty": 1 },
+        { "spec": "M4 1D-2B", "qty": 12 },
+        { "spec": "M3 2D-3B", "qty": 1 },
+        { "spec": "M3 1D-2B", "qty": 4 }
+      ]
+    },
+    {
+      "no": "03",
+      "key": "rolling",
+      "title": "ROLLING",
+      "short": { "ko": "전조", "en": "Rolling" },
+      "subtitle": { "ko": "전조 · 나사 가공", "en": "Rolling · Thread rolling" },
+      "maxSpec": "M12",
+      "photos": ["/images/equipment/rolling-1.jpg", "/images/equipment/rolling-2.jpg"],
+      "items": [
+        { "spec": "M10", "qty": 2 },
+        { "spec": "M8", "qty": 8 },
+        { "spec": "M6", "qty": 7 },
+        { "spec": "M4", "qty": 13 },
+        { "spec": "M3", "qty": 2 }
+      ]
     }
   ],
   "inspection": [
