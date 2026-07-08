@@ -8,30 +8,27 @@
 - GitHub: https://github.com/Geonho-Cho/limhwa-new
 
 ## 브랜치 작업 규칙 ⚠️ (가장 중요)
-"작업 1건 = 브랜치 1개 = PR 1개" 로 진행합니다.
+**master에 직접 커밋·푸시**합니다. (2026-07-08부터 "PR+승인 1명" 강제 규칙을 없앴습니다.)
+믿는 사람끼리의 소규모 사이트라, 승인 왕복 대신 master → Vercel 자동 배포로 바로 반영합니다.
 
-### 새 작업은 항상 "최신 master"에서 새 브랜치를 뜬다
-이전 브랜치나 pull 하지 않은 오래된 로컬 상태에서 분기하면, **이미 머지된 작업이 빠진 채로** 시작되어 충돌·덮어쓰기·혼란의 원인이 됩니다. 반드시 아래처럼 최신 master에서 새로 분기하세요.
+### 작업 시작 전 반드시 "최신 master"로 맞춘다
+남이 먼저 올린 변경이 빠진 오래된 로컬에서 작업하면 덮어쓰기·충돌의 원인이 됩니다. 작업을 시작하기 전에 항상 최신 상태로 맞추세요.
 
 ```bash
 git checkout master
-git pull origin master          # 이전 PR들이 모두 반영된 최신 상태
-git checkout -b feature/<작업명>
+git pull origin master          # 남이 올린 변경까지 모두 반영된 최신 상태
 ```
 
-- ❌ 이전 feature 브랜치 위에서 새 작업 시작 금지
-- ❌ pull 하지 않은 오래된 master/로컬 상태에서 분기 금지
+- ❌ pull 하지 않은 오래된 로컬 상태에서 작업 시작 금지
 
 ### 작업 → 배포 흐름
-1. 위 방식으로 최신 master에서 분기 → 작업 → 커밋
-2. `git push origin feature/<작업명>` → PR 생성 (base: `master`)
-3. **머지 전 반드시** 브랜치를 최신 master로 갱신하고 충돌·덮어쓰기 여부를 검사:
-   ```bash
-   git fetch origin
-   git merge-tree --write-tree master feature/<작업명>   # exit 0 = 충돌 없음
-   git merge origin/master                               # 브랜치 최신화
-   ```
-4. 충돌·덮어쓰기 없음을 확인한 뒤 PR 머지 → Vercel 자동 배포
+1. 위처럼 최신 master로 맞춘 뒤 → 작업 → 커밋
+2. `git push origin master` → **곧바로 Vercel 자동 배포**
+3. push가 거부되면(그새 원격이 더 최신), 먼저 `git pull origin master`로 최신화한 뒤 다시 push
+
+- 남은 안전장치: master **삭제 금지** · **강제덮어쓰기(force push) 금지** (그대로 유지)
+- 되돌리기: 잘못 올라가도 Vercel 배포기록에서 이전 버전으로 **1클릭 롤백**
+- PR은 선택 사항: 큰 변경을 미리보기로 먼저 확인하고 싶을 때만 `feature/<작업명>` 브랜치+PR을 써도 됩니다(강제 아님).
 
 ## 진행 방식
 - 페이지 단위로 작업하고, 각 페이지를 로컬 미리보기에서 사용자가 확인한 뒤 다음으로 넘어갑니다.
