@@ -23,11 +23,22 @@ export default function Quality() {
     },
   ]
 
-  const certifications = [
-    { name: 'ISO 9001', desc: { ko: '품질경영시스템', en: 'Quality Management System' } },
-    { name: 'IATF 16949', desc: { ko: '자동차 품질경영시스템', en: 'Automotive Quality Management' } },
-    { name: 'ISO 14001', desc: { ko: '환경경영시스템', en: 'Environmental Management System' } },
+  const inspectionEquipment: {
+    name: { ko: string; en: string }
+    model: string
+    image: string
+  }[] = [
+    { name: { ko: '형상측정기', en: 'Contour Measuring Machine' }, model: 'Mitutoyo C-3000', image: '/images/quality/inspection-1.jpg' },
+    { name: { ko: '비커스 경도기', en: 'Vickers Hardness Tester' }, model: 'Mitutoyo HM-200', image: '/images/quality/inspection-2.jpg' },
+    { name: { ko: '로크웰 경도기', en: 'Rockwell Hardness Tester' }, model: 'Mitutoyo HR-530', image: '/images/quality/inspection-3.jpg' },
+    { name: { ko: '금속현미경', en: 'Metallurgical Microscope' }, model: 'OLYMPUS PME3', image: '/images/quality/inspection-4.jpg' },
+    { name: { ko: '도금두께 측정기', en: 'Coating Thickness Analyzer' }, model: 'iEDX-150T', image: '/images/quality/inspection-5.jpg' },
+    { name: { ko: '확대경', en: 'Magnifying Inspection' }, model: 'SOMETECH VISION', image: '/images/quality/inspection-6.jpg' },
+    { name: { ko: '비디오 미터', en: 'Video Measuring System' }, model: 'VMS-1510', image: '/images/quality/inspection-7.jpg' },
+    { name: { ko: '광학 측정기', en: 'Optical Measuring System' }, model: 'Keyence LMX-X100T', image: '/images/quality/inspection-8.jpg' },
   ]
+
+  const visionPhotos = ['/images/quality/vision-1.jpg', '/images/quality/vision-2.jpg']
 
   return (
     <div className="min-h-screen">
@@ -85,19 +96,49 @@ export default function Quality() {
           </div>
         </section>
 
-        {/* 인증현황 */}
+        {/* 검사설비 현황 */}
         <section>
           <h2 className="text-2xl font-bold text-primary mb-8 text-center">
-            {lang === 'ko' ? '품질 인증' : 'Quality Certifications'}
+            {lang === 'ko' ? '검사설비 현황' : 'Inspection Equipment'}
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {certifications.map((cert, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-lg p-8 text-center">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-primary font-bold">{cert.name.split(' ')[0]}</span>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            {inspectionEquipment.map((eq, i) => (
+              <div
+                key={i}
+                className="group bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden hover-card"
+              >
+                <div className="aspect-[3/4] bg-gray-50 overflow-hidden">
+                  <img
+                    src={eq.image}
+                    alt={eq.name[lang]}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">{cert.name}</h3>
-                <p className="text-gray-600 text-sm">{cert.desc[lang]}</p>
+                <div className="p-4 text-center">
+                  <h3 className="font-bold text-gray-800 text-base">{eq.name[lang]}</h3>
+                  <p className="mt-1 text-sm font-medium text-primary/70">{eq.model}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 비전 설비 보유 */}
+        <section className="mt-16">
+          <h2 className="text-2xl font-bold text-primary mb-8 text-center">
+            {lang === 'ko' ? '비전 설비 보유' : 'Vision Inspection Systems'}
+          </h2>
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {visionPhotos.map((src, i) => (
+              <div
+                key={i}
+                className="group aspect-[3/4] rounded-2xl overflow-hidden border border-gray-200 shadow-lg bg-gray-50"
+              >
+                <img
+                  src={src}
+                  alt={`비전 설비 ${i + 1}`}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
             ))}
           </div>
