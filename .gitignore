@@ -34,6 +34,9 @@ test_pages.py
 
 .vercel
 
+# 제품 사진 보정 작업 결과물 (로컬 전용 — git에 올리지 않음)
+clean_product_photos_white_bg*/
+
 # AI tooling / orchestration (local only — do not commit)
 .claude/
 .omc/
