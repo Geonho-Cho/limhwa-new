@@ -34,6 +34,8 @@ const industryThemes: Record<string, { iconBox: string }> = {
   mobility: { iconBox: 'bg-emerald-50 text-emerald-600' },
   telecom: { iconBox: 'bg-blue-50 text-blue-600' },
   semicon: { iconBox: 'bg-violet-50 text-violet-600' },
+  automotive: { iconBox: 'bg-amber-50 text-amber-600' },
+  electronics: { iconBox: 'bg-cyan-50 text-cyan-600' },
   default: { iconBox: 'bg-primary/10 text-primary' },
 }
 
@@ -95,6 +97,24 @@ const applications = [
     desc: {
       ko: '반도체 진공 챔버용 내식성 피팅류, 산업용 로봇 관절용 고강도 마이크로 체결 부품.',
       en: 'Corrosion-resistant fittings for semiconductor vacuum chambers and high-strength micro fasteners for robot joints.',
+    },
+  },
+  {
+    no: '04',
+    type: 'automotive',
+    title: { ko: '자동차부품', en: 'Automotive Parts' },
+    desc: {
+      ko: '콤프레셔 고정 볼트를 비롯한 리벳·스크류 등 자동차 체결 부품을 공급합니다.',
+      en: 'Automotive fastening parts including compressor mounting bolts, rivets and screws.',
+    },
+  },
+  {
+    no: '05',
+    type: 'electronics',
+    title: { ko: '전자부품', en: 'Electronic Parts' },
+    desc: {
+      ko: '표준 규격 제품은 물론 고객 요구에 맞춘 특수규격까지 정밀 제작합니다.',
+      en: 'Standard parts as well as custom special-specification components made to customer requirements.',
     },
   },
 ]
@@ -284,6 +304,26 @@ function AppIcon({ type }: { type: string }) {
     return (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25zm.75-12h9v9h-9v-9z" />
+      </svg>
+    )
+  }
+  if (type === 'automotive') {
+    // 자동차부품 — 측면 자동차
+    return (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 13l1.4-4.2A2.5 2.5 0 017.8 7h8.4a2.5 2.5 0 012.4 1.8L20 13m-16 0h16m-16 0a1.5 1.5 0 00-1.5 1.5V17h2m13.5-4a1.5 1.5 0 011.5 1.5V17h-2m-11 0h9" />
+        <circle cx="8" cy="17" r="1.4" />
+        <circle cx="16" cy="17" r="1.4" />
+      </svg>
+    )
+  }
+  if (type === 'electronics') {
+    // 전자부품 — 다리 달린 IC 소자
+    return (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+        <rect x="7" y="7" width="10" height="10" rx="1.5" />
+        <circle cx="12" cy="12" r="1.6" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10 7V4m4 3V4m-4 16v-3m4 3v-3M7 10H4m3 4H4m16-4h-3m3 4h-3" />
       </svg>
     )
   }
