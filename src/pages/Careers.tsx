@@ -25,7 +25,7 @@ export default function Careers() {
       <section className="relative overflow-hidden py-20 bg-gray-50">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-[0.15] pointer-events-none"
-          style={{ backgroundImage: "url('/images/company-factory.png')" }}
+          style={{ backgroundImage: "url('/images/careers-team-1.jpg')" }}
           aria-hidden="true"
         />
         <div className="relative max-w-7xl mx-auto px-6">
@@ -123,7 +123,7 @@ export default function Careers() {
       <section className="relative overflow-hidden py-20 bg-gray-50">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-[0.15] pointer-events-none"
-          style={{ backgroundImage: "url('/images/company-factory-2.png')" }}
+          style={{ backgroundImage: "url('/images/careers-team-2.jpg')" }}
           aria-hidden="true"
         />
         <div className="relative max-w-3xl mx-auto px-6">
