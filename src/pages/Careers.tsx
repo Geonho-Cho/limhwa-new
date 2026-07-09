@@ -21,14 +21,20 @@ export default function Careers() {
         ]}
       />
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* 설명 */}
-        <div className="text-center mb-12">
-          <p className="section-subtitle">{intro[lang]}</p>
-        </div>
+      {/* 인트로 + 복리후생 — 배경사진 옅게 #1 */}
+      <section className="relative overflow-hidden py-20 bg-gray-50">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-[0.15] pointer-events-none"
+          style={{ backgroundImage: "url('/images/company-factory.png')" }}
+          aria-hidden="true"
+        />
+        <div className="relative max-w-7xl mx-auto px-6">
+          {/* 설명 */}
+          <div className="text-center mb-12">
+            <p className="section-subtitle">{intro[lang]}</p>
+          </div>
 
-        {/* 복리후생 */}
-        <section className="mb-16">
+          {/* 복리후생 */}
           <h2 className="text-2xl font-bold text-primary mb-8 text-center">
             {lang === 'ko' ? '복리후생' : 'Benefits'}
           </h2>
@@ -44,10 +50,12 @@ export default function Careers() {
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* 채용공고 */}
-        <section>
+      {/* 채용공고 */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-2xl font-bold text-primary mb-8 text-center">
             {lang === 'ko' ? '채용공고' : 'Job Openings'}
           </h2>
@@ -108,26 +116,35 @@ export default function Careers() {
               </a>
             </div>
           )}
-        </section>
+        </div>
+      </section>
 
-        {/* 연락처 안내 */}
-        <section className="mt-16 bg-white rounded-lg shadow-lg p-8 text-center">
-          <h2 className="text-xl font-bold text-primary mb-4">
-            {lang === 'ko' ? '입사 문의' : 'Employment Inquiries'}
-          </h2>
-          <p className="text-gray-600 mb-4">
-            {lang === 'ko'
-              ? '채용 관련 문의는 아래 연락처로 연락 주시기 바랍니다.'
-              : 'For employment inquiries, please contact us.'}
-          </p>
-          <p className="text-lg">
-            <span className="font-medium">Email:</span> team@limhwa.com
-          </p>
-          <p className="text-lg">
-            <span className="font-medium">Tel:</span> 031-366-8585
-          </p>
-        </section>
-      </div>
+      {/* 입사 문의 — 배경사진 옅게 #2 */}
+      <section className="relative overflow-hidden py-20 bg-gray-50">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-[0.15] pointer-events-none"
+          style={{ backgroundImage: "url('/images/company-factory-2.png')" }}
+          aria-hidden="true"
+        />
+        <div className="relative max-w-3xl mx-auto px-6">
+          <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+            <h2 className="text-xl font-bold text-primary mb-4">
+              {lang === 'ko' ? '입사 문의' : 'Employment Inquiries'}
+            </h2>
+            <p className="text-gray-600 mb-4">
+              {lang === 'ko'
+                ? '채용 관련 문의는 아래 연락처로 연락 주시기 바랍니다.'
+                : 'For employment inquiries, please contact us.'}
+            </p>
+            <p className="text-lg">
+              <span className="font-medium">Email:</span> team@limhwa.com
+            </p>
+            <p className="text-lg">
+              <span className="font-medium">Tel:</span> 031-366-8585
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
