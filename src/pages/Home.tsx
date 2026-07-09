@@ -13,10 +13,9 @@ export default function Home() {
 
   const categories = [
     { id: 'bolt', name: lang === 'ko' ? '볼트' : 'Bolt' },
-    { id: 'nut', name: lang === 'ko' ? '너트' : 'Nut' },
-    { id: 'gear', name: lang === 'ko' ? '기어' : 'Gear' },
+    { id: 'screw', name: lang === 'ko' ? '스크류' : 'Screw' },
     { id: 'rivet', name: lang === 'ko' ? '리벳' : 'Rivet' },
-    { id: 'etc', name: 'ETC' },
+    { id: 'forged', name: lang === 'ko' ? '단조품' : 'Forged Parts' },
   ]
 
   const technologies = [
@@ -84,7 +83,7 @@ export default function Home() {
             <div className="relative group">
               <div className="aspect-[4/3] bg-gradient-to-br from-gray-50 to-gray-200 rounded-2xl overflow-hidden shadow-lg relative border border-gray-100">
                 <img
-                  src="/images/equipment/former-001.jpg"
+                  src="/images/equipment/former-1.jpg"
                   alt="Bolt Former"
                   className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
                 />
@@ -145,10 +144,10 @@ export default function Home() {
             {/* 오른쪽: 제품 이미지 */}
             <div className="relative group">
               <div className="aspect-video bg-gray-800 rounded-2xl overflow-hidden shadow-2xl relative">
-                <img 
-                  src="/images/products/bolt-001.jpg" 
-                  alt="Cold Forged Bolt Product" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                <img
+                  src="/images/products/standard-1.png"
+                  alt="Cold Forged Bolt Product"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent"></div>
                 <div className="absolute bottom-6 left-6 text-white text-left z-10">
@@ -166,7 +165,7 @@ export default function Home() {
             {categories.map((cat) => (
               <Link
                 key={cat.id}
-                to={`/products?category=${cat.id}`}
+                to="/products#lineup"
                 className="tab-btn"
               >
                 {cat.name}
