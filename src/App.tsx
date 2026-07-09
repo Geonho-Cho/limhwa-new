@@ -1,14 +1,12 @@
 import { useEffect } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './pages/Home'
 import Quote from './pages/Quote'
 import Products from './pages/Products'
 import About from './pages/About'
-import Equipment from './pages/Equipment'
 import RnD from './pages/RnD'
 import ESG from './pages/ESG'
-import Quality from './pages/Quality'
 import Careers from './pages/Careers'
 import CareerApply from './pages/CareerApply'
 
@@ -39,10 +37,11 @@ function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="products" element={<Products />} />
-        <Route path="equipment" element={<Equipment />} />
         <Route path="rnd" element={<RnD />} />
+        {/* 제조설비·품질관리는 R&D센터 한 페이지로 통합 — 기존 경로는 앵커로 리다이렉트 */}
+        <Route path="equipment" element={<Navigate to="/rnd#equipment" replace />} />
+        <Route path="quality" element={<Navigate to="/rnd#quality" replace />} />
         <Route path="esg" element={<ESG />} />
-        <Route path="quality" element={<Quality />} />
         <Route path="careers" element={<Careers />} />
         <Route path="careers/apply" element={<CareerApply />} />
         <Route path="quote" element={<Quote />} />

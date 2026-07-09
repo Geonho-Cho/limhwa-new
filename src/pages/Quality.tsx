@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
-import PageBanner from '../components/PageBanner'
 
-export default function Quality() {
+// R&D 센터 페이지에 포함되는 '품질관리' 섹션 (독립 배너 없이 섹션으로만 렌더)
+export function QualitySection() {
   const { i18n } = useTranslation()
   const lang = i18n.language as 'ko' | 'en'
 
@@ -41,22 +41,13 @@ export default function Quality() {
   const visionPhotos = ['/images/quality/vision-1.jpg', '/images/quality/vision-2.jpg']
 
   return (
-    <div className="min-h-screen">
-      {/* 페이지 배너 */}
-      <PageBanner
-        title={lang === 'ko' ? '품질관리' : 'Quality Control'}
-        titleEn="Quality Management System"
-        breadcrumb={[
-          { label: 'HOME', path: '/' },
-          { label: 'R&D CENTER', path: '/rnd' },
-          { label: 'QUALITY' },
-        ]}
-      />
-
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* 설명 */}
+    <section id="quality" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* 섹션 헤더 */}
         <div className="text-center mb-12">
-          <p className="section-subtitle">
+          <h2 className="heading-en text-sm text-accent mb-4">QUALITY</h2>
+          <h3 className="text-3xl font-bold">{lang === 'ko' ? '품질관리' : 'Quality Control'}</h3>
+          <p className="section-subtitle mt-4">
             {lang === 'ko'
               ? '철저한 품질관리 시스템으로 최고의 제품을 제공합니다.'
               : 'Providing the best products through thorough quality management.'}
@@ -144,6 +135,6 @@ export default function Quality() {
           </div>
         </section>
       </div>
-    </div>
+    </section>
   )
 }

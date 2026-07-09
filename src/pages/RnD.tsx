@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import PageBanner from '../components/PageBanner'
 import rndData from '../data/rnd.json'
+import { EquipmentSection } from './Equipment'
+import { QualitySection } from './Quality'
 
 interface Tech {
   id: string
@@ -27,24 +29,32 @@ export default function RnD() {
         ]}
       />
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* 설명 */}
-        <div className="text-center mb-12">
-          <p className="section-subtitle">{intro[lang]}</p>
-        </div>
+      {/* R&D센터 — 핵심 기술 */}
+      <section id="rnd" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="heading-en text-sm text-accent mb-4">R&D CENTER</h2>
+            <h3 className="text-3xl font-bold">{lang === 'ko' ? 'R&D센터' : 'R&D Center'}</h3>
+            <p className="section-subtitle mt-4">{intro[lang]}</p>
+          </div>
 
-        {/* 핵심 기술 */}
-        <section>
-          <h2 className="text-2xl font-bold text-primary mb-8 text-center">
+          {/* 핵심 기술 */}
+          <h4 className="text-2xl font-bold text-primary mb-8 text-center">
             {lang === 'ko' ? '핵심 기술' : 'Core Technologies'}
-          </h2>
+          </h4>
           <div className="grid md:grid-cols-2 gap-8">
             {(technologies as Tech[]).map((tech) => (
               <TechCard key={tech.id} tech={tech} lang={lang} />
             ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      {/* 제조설비 */}
+      <EquipmentSection />
+
+      {/* 품질관리 */}
+      <QualitySection />
     </div>
   )
 }

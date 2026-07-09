@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next'
-import PageBanner from '../components/PageBanner'
 import equipmentData from '../data/equipment.json'
 
 interface EqItem {
@@ -18,7 +17,8 @@ interface Process {
   items: EqItem[]
 }
 
-export default function Equipment() {
+// R&D 센터 페이지에 포함되는 '제조설비' 섹션 (독립 배너 없이 섹션으로만 렌더)
+export function EquipmentSection() {
   const { i18n } = useTranslation()
   const lang = i18n.language as 'ko' | 'en'
   const processes = equipmentData.processes as Process[]
@@ -26,34 +26,18 @@ export default function Equipment() {
   const totals = processes.map((p) => p.items.reduce((s, i) => s + i.qty, 0))
 
   return (
-    <div className="min-h-screen">
-      {/* 페이지 배너 */}
-      <PageBanner
-        title={lang === 'ko' ? '제조설비' : 'Equipment'}
-        titleEn="Manufacturing Equipment"
-        breadcrumb={[
-          { label: 'HOME', path: '/' },
-          { label: 'R&D CENTER', path: '/rnd' },
-          { label: 'EQUIPMENT' },
-        ]}
-      />
-
-      <div className="max-w-7xl mx-auto px-6 py-16">
+    <section id="equipment" className="py-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-6">
         {/* 섹션 헤더 */}
-        <div className="flex items-center gap-3 mb-3">
-          <span className="w-1.5 h-7 bg-primary rounded-full" />
-          <h2 className="text-2xl md:text-3xl font-bold text-dark">
-            {lang === 'ko' ? '설비 보유 현황' : 'Equipment Holdings'}
-          </h2>
-          <span className="heading-en text-sm text-gray-400 font-semibold tracking-wider">
-            EQUIPMENT HOLDINGS
-          </span>
+        <div className="text-center mb-12">
+          <h2 className="heading-en text-sm text-accent mb-4">EQUIPMENT</h2>
+          <h3 className="text-3xl font-bold">{lang === 'ko' ? '제조설비' : 'Manufacturing Equipment'}</h3>
+          <p className="section-subtitle mt-4">
+            {lang === 'ko'
+              ? '최신 설비와 기술력으로 최고의 품질을 보장합니다.'
+              : 'Ensuring the highest quality with state-of-the-art equipment.'}
+          </p>
         </div>
-        <p className="text-gray-600 mb-10">
-          {lang === 'ko'
-            ? '최신 설비와 기술력으로 최고의 품질을 보장합니다.'
-            : 'Ensuring the highest quality with state-of-the-art equipment.'}
-        </p>
 
         {/* 3열 공정 — 사진(있으면) + 보유현황 카드 */}
         <div className="grid md:grid-cols-3 gap-6 items-start">
@@ -80,7 +64,7 @@ export default function Equipment() {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

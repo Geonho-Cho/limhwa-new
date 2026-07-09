@@ -62,8 +62,8 @@ function Header() {
       label: 'R&D CENTER',
       submenu: [
         { path: '/rnd', label: lang === 'ko' ? 'R&D센터' : 'R&D Center' },
-        { path: '/equipment', label: lang === 'ko' ? '제조설비' : 'Equipment' },
-        { path: '/quality', label: lang === 'ko' ? '품질관리' : 'Quality' },
+        { path: '/rnd#equipment', label: lang === 'ko' ? '제조설비' : 'Equipment' },
+        { path: '/rnd#quality', label: lang === 'ko' ? '품질관리' : 'Quality' },
       ],
     },
     { path: '/esg', label: 'ESG' },
