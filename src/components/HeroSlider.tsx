@@ -12,7 +12,7 @@ interface Slide {
 const slides: Slide[] = [
   {
     id: 1,
-    image: '/images/hero/slide1.jpg',
+    image: '/images/hero/slide1.png',
     title: ['냉간단조의 미래를 위한', '글로벌 체결 솔루션'],
     subtitle: '품질로 앞서가고 혁신으로 성장하는 - 임화금속',
   },
@@ -26,7 +26,7 @@ const slides: Slide[] = [
     id: 3,
     image: '/images/hero/slide3.jpg',
     title: ['자동차 핵심 부품', '안정적 공급'],
-    subtitle: '볼트, 스크류, 리벳 - 최고 품질의 냉간단조 부품',
+    subtitle: '최고 품질의 냉간단조 부품',
   },
 ]
 
