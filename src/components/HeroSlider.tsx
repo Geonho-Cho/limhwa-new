@@ -24,9 +24,9 @@ const slides: Slide[] = [
   },
   {
     id: 3,
-    image: '/images/hero/slide3.png',
+    image: '/images/hero/slide3.jpg',
     title: ['자동차 핵심 부품', '안정적 공급'],
-    subtitle: '볼트, 너트, 기어 - 최고 품질의 냉간단조 부품',
+    subtitle: '볼트, 스크류, 리벳 - 최고 품질의 냉간단조 부품',
   },
 ]
 
