@@ -18,13 +18,13 @@ const slides: Slide[] = [
   },
   {
     id: 2,
-    image: '/images/hero/slide2.jpg',
+    image: '/images/hero/slide2.png',
     title: ['정밀함으로', '신뢰를 만듭니다'],
     subtitle: '수십 년 축적된 기술력과 품질의 자부심',
   },
   {
     id: 3,
-    image: '/images/hero/slide3.jpg',
+    image: '/images/hero/slide3.png',
     title: ['자동차 핵심 부품', '안정적 공급'],
     subtitle: '볼트, 너트, 기어 - 최고 품질의 냉간단조 부품',
   },
