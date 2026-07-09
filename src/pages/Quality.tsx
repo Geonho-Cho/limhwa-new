@@ -128,7 +128,7 @@ export default function Quality() {
           <h2 className="text-2xl font-bold text-primary mb-8 text-center">
             {lang === 'ko' ? '비전 설비 보유' : 'Vision Inspection Systems'}
           </h2>
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {visionPhotos.map((src, i) => (
               <div
                 key={i}
