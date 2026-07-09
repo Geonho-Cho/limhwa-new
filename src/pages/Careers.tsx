@@ -24,7 +24,7 @@ export default function Careers() {
       {/* 복리후생 + 채용공고 — 녹색 팀 사진을 두 칸에 걸쳐 옅고 흐리게 (얼굴 흐림) */}
       <div className="relative overflow-hidden">
         <div
-          className="absolute inset-0 bg-[length:100%_auto] bg-no-repeat bg-center opacity-[0.16] pointer-events-none"
+          className="absolute inset-0 bg-[length:70%_auto] bg-no-repeat bg-center opacity-[0.16] pointer-events-none"
           style={{ backgroundImage: "url('/images/careers-team-2.jpg')" }}
           aria-hidden="true"
         />
@@ -126,7 +126,7 @@ export default function Careers() {
       {/* 입사 문의 — 파란 팀 사진을 마지막 칸에 옅고 흐리게 (얼굴 흐림) */}
       <section className="relative overflow-hidden py-20 bg-gray-50">
         <div
-          className="absolute inset-0 bg-[length:100%_auto] bg-no-repeat bg-center opacity-[0.16] pointer-events-none"
+          className="absolute inset-0 bg-[length:70%_auto] bg-no-repeat bg-center opacity-[0.16] pointer-events-none"
           style={{ backgroundImage: "url('/images/careers-team-1.jpg')" }}
           aria-hidden="true"
         />
