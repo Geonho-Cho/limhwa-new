@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import PageBanner from '../components/PageBanner'
 import companyData from '../data/company.json'
@@ -7,7 +6,6 @@ export default function About() {
   const { i18n } = useTranslation()
   const lang = i18n.language as 'ko' | 'en'
   const { info, ceoMessage, history, certifications } = companyData
-  const [zoomImage, setZoomImage] = useState<string | null>(null)
 
   return (
     <div className="min-h-screen">
@@ -128,27 +126,19 @@ export default function About() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {certifications.map((cert, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => setZoomImage(cert.image)}
-                className="group text-center focus:outline-none"
-              >
-                <div className="bg-white rounded-2xl shadow-sm p-4 mb-3 overflow-hidden group-hover:shadow-lg transition-shadow">
+              <div key={index} className="text-center">
+                <div className="bg-white rounded-2xl shadow-sm p-4 mb-3 overflow-hidden">
                   <img
                     src={cert.image}
                     alt={cert.name}
                     loading="lazy"
-                    className="w-full h-80 object-contain transition-transform group-hover:scale-[1.02]"
+                    className="w-full h-80 object-contain"
                   />
                 </div>
                 <p className="text-sm font-medium text-gray-700">{cert.name}</p>
-              </button>
+              </div>
             ))}
           </div>
-          <p className="text-center text-sm text-gray-400 mt-8">
-            {lang === 'ko' ? '이미지를 클릭하면 크게 볼 수 있습니다.' : 'Click an image to view it in full size.'}
-          </p>
         </div>
       </section>
 
@@ -187,30 +177,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* 인증서 확대 보기 (라이트박스) */}
-      {zoomImage && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 cursor-zoom-out"
-          onClick={() => setZoomImage(null)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <img
-            src={zoomImage}
-            alt=""
-            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <button
-            type="button"
-            onClick={() => setZoomImage(null)}
-            className="absolute top-6 right-8 text-white text-5xl leading-none hover:text-gray-300"
-            aria-label={lang === 'ko' ? '닫기' : 'Close'}
-          >
-            &times;
-          </button>
-        </div>
-      )}
     </div>
   )
 }
