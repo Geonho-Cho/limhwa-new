@@ -58,7 +58,7 @@ export default function Careers() {
 
         {/* 채용공고 */}
         <section className="relative py-20">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-5xl mx-auto px-6">
             <h2 className="text-2xl font-bold text-primary mb-8 text-center">
               {lang === 'ko' ? '채용공고' : 'Job Openings'}
             </h2>
@@ -130,7 +130,7 @@ export default function Careers() {
           style={{ backgroundImage: "url('/images/careers-team-1.jpg')" }}
           aria-hidden="true"
         />
-        <div className="relative max-w-3xl mx-auto px-6">
+        <div className="relative max-w-5xl mx-auto px-6">
           <div className="bg-white rounded-lg shadow-lg p-8 text-center">
             <h2 className="text-xl font-bold text-primary mb-4">
               {lang === 'ko' ? '입사 문의' : 'Employment Inquiries'}

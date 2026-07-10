@@ -7,26 +7,28 @@ interface Slide {
   image: string
   title: string[]
   subtitle: string
+  stretch?: boolean // true면 화면에 꽉 차게 늘림(상·하단 다 보임, 비율 왜곡 허용)
 }
 
 const slides: Slide[] = [
   {
     id: 1,
-    image: '/images/hero/slide1.png',
+    image: '/images/hero/slide1.jpg',
     title: ['냉간단조의 미래를 위한', '글로벌 체결 솔루션'],
     subtitle: '품질로 앞서가고 혁신으로 성장하는 - 임화금속',
   },
   {
     id: 2,
-    image: '/images/hero/slide2.png',
+    image: '/images/hero/slide2.jpg',
     title: ['정밀함으로', '신뢰를 만듭니다'],
     subtitle: '수십 년 축적된 기술력과 품질의 자부심',
   },
   {
     id: 3,
     image: '/images/hero/slide3.jpg',
-    title: ['자동차 핵심 부품', '안정적 공급'],
+    title: ['안정적인 공급으로', '고객과의 약속을 지킵니다'],
     subtitle: '최고 품질의 냉간단조 부품',
+    stretch: true,
   },
 ]
 
@@ -59,9 +61,10 @@ export default function HeroSlider() {
         >
           {/* 배경 이미지 또는 placeholder */}
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            className="absolute inset-0 bg-center bg-no-repeat"
             style={{
               backgroundImage: `url(${slide.image})`,
+              backgroundSize: slide.stretch ? '100% 100%' : 'cover',
               backgroundColor: '#2a2a2a',
             }}
           >
