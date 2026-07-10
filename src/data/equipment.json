@@ -30,6 +30,7 @@
       "items": [
         { "spec": "M12 2D-3B", "qty": 1 },
         { "spec": "M10 RH", "qty": 1 },
+        { "spec": "M10 2D-3B", "qty": 2 },
         { "spec": "M8 2D-3B", "qty": 3 },
         { "spec": "M8 2D-2B", "qty": 2 },
         { "spec": "M6 2D-3B", "qty": 4 },
