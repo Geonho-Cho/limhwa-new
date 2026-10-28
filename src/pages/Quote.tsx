@@ -140,6 +140,8 @@ export default function Quote() {
           {/* FormSubmit 설정 (화면에 보이지 않는 항목) */}
           <input type="hidden" name="_subject" defaultValue="[임화금속 홈페이지] 새 견적문의" />
           <input type="hidden" name="_template" defaultValue="table" />
+          {/* 참조(CC) 수신 — sales@ 외에 team@ 에서도 견적 응대 */}
+          <input type="hidden" name="_cc" defaultValue="team@limhwa.com" />
           <input type="hidden" name="_captcha" defaultValue="false" />
           <input
             type="hidden"
