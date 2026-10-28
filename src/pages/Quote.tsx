@@ -323,7 +323,7 @@ export default function Quote() {
                   ? '· 파일이 크거나 첨부가 되지 않는 경우, 아래 이메일로 보내주시면 감사하겠습니다.'
                   : "· If your files are too large or won't upload, please email them to the address below."}
               </p>
-              <p className="mt-3 text-center text-base font-semibold text-primary">sales@limhwa.com</p>
+              <p className="mt-3 text-center text-base font-semibold text-primary">sales@limhwa.com · team@limhwa.com</p>
             </div>
           </div>
 
